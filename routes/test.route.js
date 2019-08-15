@@ -1,3 +1,5 @@
+// [NOTE] This route is to test certain mongoose functions only
+
 const Test = require('../models/test.model');
 const express = require('express');
 const router = express.Router();
@@ -14,8 +16,9 @@ router.post('/', (request, response) => {
 
 // Make a get request to test route
 router.get('/', (request, response) => {
-    const results = Test.find()
-    response.status(200).json(results)
+    Test.find()
+        .then(results => response.status(200).json({ results }))
+        .catch(error => response.status(400).json({ error }))
 })
 
 module.exports = router;
