@@ -14,8 +14,11 @@ db.once('open', function() {
 app.use(express.json());
 
 // Routes
-const testRoutes = require('./routes/test.route');
-app.use('/api/test', testRoutes)
+const testRouter = require('./routes/test.route');
+const jobRouter = require('./routes/job.route');
+app.use('/api/test', testRouter)
+app.use('/api/jobs', jobRouter)
+
 
 const port = process.env.PORT || 3001;
 
