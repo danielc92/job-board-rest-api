@@ -14,7 +14,7 @@ router.post('/', (request, response) => {
 
 // Make a get request to test route
 router.get('/', (request, response) => {
-    Test.find()
+    Job.find()
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
 })
