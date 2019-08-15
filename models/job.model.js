@@ -13,12 +13,12 @@ const JobSchema = mongoose.Schema(
             required: true,
             trim: true
         },
-        requirements: {
+        requirements: [{
             type: String,
-            reqyured: true,
+            required: true,
             lowercase: true,
             trim: true
-        },
+        }],
         industry: {
             type: String,
             reqyured: true,
