@@ -16,6 +16,8 @@ app.use(express.json());
 // Routes
 const testRouter = require('./routes/test.route');
 const jobRouter = require('./routes/job.route');
+const skillRouter = require('./routes/skill.route');
+app.use('/api/skills', skillRouter)
 app.use('/api/test', testRouter)
 app.use('/api/jobs', jobRouter)
 

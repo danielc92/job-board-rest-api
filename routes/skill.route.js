@@ -1,6 +1,6 @@
 const Skill = require('../models/skill.model');
-const mongoose = require('mongoose');
-const router = mongoose.Router();
+const express = require('express');
+const router = express.Router();
 
 router.get('/', (request, response) => {
     Skill.find()
