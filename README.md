@@ -10,6 +10,7 @@ Building backend for a Job Board app in Nodejs, Express.js, MongoDB and mongoose
 # Available routes
 - `/api/skills` (individual skills for jobs)
 - `/api/jobs` (job postings)
+- `/api/applications` (applications)
 - `/api/test` (for testing purposes only)
 
 ### Running 

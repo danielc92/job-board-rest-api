@@ -2,19 +2,23 @@ const mongoose = require('mongoose');
 
 const JobSchema = mongoose.Schema(
     {
-        job_title: {
-            type: String,
-            required: true,
-            lowercase: true,
-            trim: true
-        },
         creator_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,
             trim: true
         },
-        company_desc: {
+        skills: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Skill'
+        }],
+        title: {
+            type: String,
+            required: true,
+            lowercase: true,
+            trim: true
+        },
+        about: {
             type: String,
             required: true,
             trim: true
@@ -24,10 +28,6 @@ const JobSchema = mongoose.Schema(
             required: true,
             lowercase: true,
             trim: true
-        }],
-        skills: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Skill'
         }],
         industry: {
             type: String,
@@ -44,6 +44,10 @@ const JobSchema = mongoose.Schema(
             type: Number,
             min: 0,
             max: 1000000000
+        },
+        benefits: {
+            type: String,
+            trim: true
         },
         closes: {
             type: Date
