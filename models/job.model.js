@@ -8,6 +8,12 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         },
+        creator_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+            trim: true
+        },
         company_desc: {
             type: String,
             required: true,
