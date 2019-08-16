@@ -16,6 +16,10 @@ const JobApplicationSchema = mongoose.Schema({
         default: "applied",
         trim: true,
         lowercase: true
+    },
+    rating: {
+        type: Number,
+        default: 0
     }
 },
 {
