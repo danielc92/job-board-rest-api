@@ -17,9 +17,13 @@ app.use(express.json());
 const testRouter = require('./routes/test.route');
 const jobRouter = require('./routes/job.route');
 const skillRouter = require('./routes/skill.route');
+const userRouter = require('./routes/user.route');
+const applicationRouter = require('./routes/application.route');
 app.use('/api/skills', skillRouter)
 app.use('/api/test', testRouter)
 app.use('/api/jobs', jobRouter)
+app.use('/api/application', applicationRouter)
+app.use('/api/user', userRouter)
 
 
 const port = process.env.PORT || 3001;

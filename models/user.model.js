@@ -19,7 +19,7 @@ const UserSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
-    skils: [{
+    skills: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Skill'
     }]
