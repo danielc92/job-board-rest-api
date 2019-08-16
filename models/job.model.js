@@ -19,9 +19,13 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         }],
+        skills: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Skill'
+        }],
         industry: {
             type: String,
-            reqyured: true,
+            required: true,
             lowercase: true,
             trim: true
         },
