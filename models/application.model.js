@@ -10,6 +10,12 @@ const JobApplicationSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Job',
         required: true
+    },
+    status: {
+        type: String,
+        default: "applied",
+        trim: true,
+        lowercase: true
     }
 },
 {
