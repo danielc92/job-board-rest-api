@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const settings = require('../settings');
+const jwt = require('jsonwebtoken');
+
 
 const UserSchema = mongoose.Schema({
     email: {
@@ -31,5 +34,25 @@ const UserSchema = mongoose.Schema({
 {
     timestamps: true
 })
+
+UserSchema.methods.makeToken = () => {
+
+    const tokenHash = jwt.sign(
+        {
+            _id: this._id
+        },
+        settings.token_secret,
+        {
+            expiresIn: settings.token_expiry_seconds
+        }
+    )
+
+    const token = {
+        "x-auth-token": tokenHash,
+        "expiry-in-seconds": settings.token_expiry_seconds
+    }
+
+    return token;
+}
 
 module.exports = mongoose.model('User', UserSchema)
