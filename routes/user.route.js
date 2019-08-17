@@ -36,12 +36,9 @@ router.post('/register', async (request, response) => {
     await user.save();
 
     console.log('Starting to make token')
-    // Send response indicating success, along with token
-    const token = user.makeToken();
-    response.header(token).json({
-        message: "Account has been created.",
-        email: user.email,
-        _id: user._id
+    // Send response indicating success
+    response.status(200).json({
+        message: `Account created for ${user.email}`
     })
 })
 
