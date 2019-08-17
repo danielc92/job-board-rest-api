@@ -19,6 +19,10 @@ const UserSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
     skills: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Skill'
