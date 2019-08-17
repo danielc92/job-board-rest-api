@@ -8,7 +8,7 @@ module.exports = function(request, response, next) {
 
     // Check if token exists
     if (!token) {
-        return response.status(401).json({message: "Access denied, no token was provided in headers (x-access-token or authorization)."})
+        return response.status(401).json({ error: "Access denied, no token was provided in headers (x-access-token or authorization)."})
     }
 
     try {
@@ -16,6 +16,6 @@ module.exports = function(request, response, next) {
         request.user = decoded;
         next();
     } catch (ex) {
-        response.status(400).json({message: "Invalid Token, try again."})
+        response.status(400).json({ error: "Invalid Token, try again."})
     }
 }
