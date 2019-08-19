@@ -1,6 +1,15 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const rateLimit = require('express-rate-limit');
+
+// Rate limiter
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 5
+})
+app.use(limiter)
+
 
 // Connect to MongoDB via mongoose.
 mongoose.connect('mongodb://localhost:27017/jobboard', { useNewUrlParser: true })
