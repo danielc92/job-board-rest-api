@@ -30,3 +30,5 @@ Planning to deploy within Docker containers or barebone server on AWS/GCP/DO.
 ### Sources
 - [Mongoose documentation](https://www.npmjs.com/package/mongoose)
 - [Express.js documentation](https://expressjs.com/)
+- [Basic rate limiting for express](https://www.npmjs.com/package/express-rate-limit)
+- [Clustering in Node](https://nodejs.org/api/cluster.html)
