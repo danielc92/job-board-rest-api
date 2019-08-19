@@ -32,7 +32,7 @@ app.use('/api/skills', skillRouter)
 app.use('/api/test', testRouter)
 app.use('/api/jobs', jobRouter)
 app.use('/api/application', applicationRouter)
-app.use('/api/user', userRouter)
+app.use('/api/auth', userRouter)
 
 
 const port = process.env.PORT || 3001;
