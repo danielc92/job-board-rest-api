@@ -8,6 +8,12 @@ const JobSchema = mongoose.Schema(
             required: true,
             trim: true
         },
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'JobCategory',
+            required: true,
+            trim: true
+        },
         skills: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Skill'
@@ -29,12 +35,6 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         }],
-        industry: {
-            type: String,
-            required: true,
-            lowercase: true,
-            trim: true
-        },
         salary_range_low: {
             type: Number,
             min: 0,
