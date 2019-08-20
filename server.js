@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+
+// Cross origin
+app.use(cors())
 
 // Rate limiter
 const limiter = rateLimit({
