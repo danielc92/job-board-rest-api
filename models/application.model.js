@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const JobApplicationSchema = mongoose.Schema({
-    user_id: {
+    applicant_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -13,7 +13,7 @@ const JobApplicationSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "applied",
+        default: "in progress",
         trim: true,
         lowercase: true
     },

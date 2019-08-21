@@ -13,7 +13,7 @@ router.post('/', (request, response) => {
 
 router.get('/', (request, response) => {
     Application.find()
-        .populate("user_id job_id")
+        .populate("applicant_id job_id")
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
 })
