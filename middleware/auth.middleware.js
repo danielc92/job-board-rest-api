@@ -11,6 +11,7 @@ module.exports = function(request, response, next) {
         return response.status(401).json({ error: "Access denied, no token was provided in headers (x-access-token or authorization)."})
     }
 
+    // Attempt to verify token and set request.user 
     try {
         const decoded = jwt.verify(token, settings.token_secret);
         request.user = decoded;

@@ -16,6 +16,7 @@ router.post('/', authMiddleware, (request, response) => {
 
 // Make a get request to test route
 router.get('/', authMiddleware, (request, response) => {
+
     Job.find()
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
