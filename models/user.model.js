@@ -34,7 +34,12 @@ const UserSchema = mongoose.Schema({
     skills: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Skill'
-    }]
+    }],
+    availability: {
+        type: String,
+        lowercase: true,
+        trim: true
+    }
 },
 {
     timestamps: true
