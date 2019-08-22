@@ -8,10 +8,14 @@ Building backend for a Job Board app in Nodejs, Express.js, MongoDB and mongoose
 - Nodejs backend
 
 ### Available routes
-- `/api/skills` (individual skills for jobs)
-- `/api/jobs` (job postings)
-- `/api/applications` (applications)
-- `/api/test` (for testing purposes only)
+- `/api/skill` (individual skills for jobs)
+- `/api/job` (job postings)
+- `/api/job-category` (job categories such as healthcare/retail/administration)
+- `/api/benefit` (benefits relating to job posts)
+- `/api/application` (applications)
+- `/api/auth/login` (provided valid login details, will return a json web token)
+- `/api/auth/register` (allows creation of new accounts)
+- `/api/test` (for testing purposes only, not part of main application)
 
 ### Running the server 
 `nodemon` can be installed to hot reload the server during development phase.
