@@ -31,14 +31,17 @@ const testRouter = require('./routes/test.route');
 const jobRouter = require('./routes/job.route');
 const skillRouter = require('./routes/skill.route');
 const userRouter = require('./routes/user.route');
+const benefitRouter = require('./routes/benefit.route');
 const applicationRouter = require('./routes/application.route');
 const jobCategoryRouter = require('./routes/job_category.route');
-app.use('/api/job-category', jobCategoryRouter)
-app.use('/api/skill', skillRouter)
-app.use('/api/test', testRouter)
-app.use('/api/job', jobRouter)
-app.use('/api/application', applicationRouter)
-app.use('/api/auth', userRouter)
+
+app.use('/api/job-category', jobCategoryRouter);
+app.use('/api/skill', skillRouter);
+app.use('/api/test', testRouter);
+app.use('/api/job', jobRouter);
+app.use('/api/benefit', benefitRouter);
+app.use('/api/application', applicationRouter);
+app.use('/api/auth', userRouter);
 
 
 const port = process.env.PORT || 3001;
