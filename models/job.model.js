@@ -16,7 +16,7 @@ const JobSchema = mongoose.Schema(
         },
         skills: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Skill'
+            ref: 'Skill' 
         }],
         title: {
             type: String,
