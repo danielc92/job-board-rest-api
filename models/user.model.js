@@ -36,7 +36,7 @@ const UserSchema = mongoose.Schema({
         ref: 'Skill'
     }],
     availability: {
-        type: String,
+        type: Boolean,
         lowercase: true,
         trim: true
     }
