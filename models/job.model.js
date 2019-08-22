@@ -45,10 +45,10 @@ const JobSchema = mongoose.Schema(
             min: 0,
             max: 1000000000
         },
-        benefits: {
-            type: String,
-            trim: true
-        },
+        benefits: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Benefit'
+        }],
         closes: {
             type: Date
         }
