@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const JobCategory = require('../models/job_categories.model');
+const JobCategory = require('../models/category.model');
 
 router.get('/', (request, response) => {
     JobCategory.find()

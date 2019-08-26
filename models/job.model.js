@@ -10,10 +10,14 @@ const JobSchema = mongoose.Schema(
         },
         category: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'JobCategory',
+            ref: 'Category',
             required: true,
             trim: true
         },
+        benefits: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Benefit'
+        }],
         skills: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Skill' 
@@ -45,10 +49,6 @@ const JobSchema = mongoose.Schema(
             min: 0,
             max: 1000000000
         },
-        benefits: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Benefit'
-        }],
         closes: {
             type: Date
         }

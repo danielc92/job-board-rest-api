@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const JobCategorySchema = mongoose.Schema({
+const CategorySchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -11,4 +11,4 @@ const JobCategorySchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('JobCategory', JobCategorySchema)
+module.exports = mongoose.model('Category', CategorySchema)

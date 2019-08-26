@@ -12,6 +12,7 @@ module.exports = function(request, response, next) {
     }
 
     // Attempt to verify token and set request.user 
+    // If successful request object will have access to user details from makeToken method
     try {
         const decoded = jwt.verify(token, settings.token_secret);
         request.user = decoded;
