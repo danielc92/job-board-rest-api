@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const ThingSchema = mongoose.Schema({
+    title: {
+        type:String,
+        required:true
+    },
+    content: {
+        type:String,
+        required:true
+    }
+})
+
 const TestSchema = mongoose.Schema({
     name: {
         type: String,
@@ -9,7 +20,8 @@ const TestSchema = mongoose.Schema({
     },
     country: {
         type: String
-    }
+    },
+    things: [ThingSchema]
 },
 {
     timestamps: true

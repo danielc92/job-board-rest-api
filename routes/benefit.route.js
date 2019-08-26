@@ -17,5 +17,4 @@ router.post('/', (request, response) => {
         .catch(error => response.status(400).json({ error }))  
 })
 
-module.exports =
- router;
+module.exports = router;

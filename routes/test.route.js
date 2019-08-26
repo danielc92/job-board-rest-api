@@ -7,18 +7,13 @@ const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 
 // Make a post request to test route
-router.post('/', authMiddleware, (request, response) => {
+router.post('/', (request, response) => {
 
-    if (request.user._id === request.body._id) {
-        return response.status(200).json({
-            msg: "Ids match",
-            idSent: request.body._id,
-            idAuth: request.user._id,
-            stuff: request.body.stuff
-        })
-    } else {
-        return response.status(400).json({error: "Nothing here"})
-    }
+    let new_object = new Test(request.body)
+
+    new_object.save()
+        .then(r => response.status(200).json(r))
+        .catch(e => response.status(400).json(e))
 })
 
 // Make a get request to test route
