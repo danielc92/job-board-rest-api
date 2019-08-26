@@ -39,6 +39,10 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         lowercase: true,
         trim: true
+    },
+    summary: {
+        type: String,
+        trim: true
     }
 },
 {
