@@ -6,7 +6,7 @@ const ThingSchema = mongoose.Schema({
         required:true
     },
     content: {
-        type:String,
+        type: Number,
         required:true
     }
 })

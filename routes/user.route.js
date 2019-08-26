@@ -10,7 +10,7 @@ router.post('/register', async (request, response) => {
     // First check if the email is taken
     let user = await User.findOne({ email: request.body.email })
 
-    if (user) return response.status(400).json({ message: "Email provided has already been taken."})
+    if (user) return response.status(400).json({ message: "email unavailable."})
 
     // Decontruct variables from the post body.
     const { email, password, first_name, last_name } = request.body;
@@ -20,8 +20,6 @@ router.post('/register', async (request, response) => {
         email, password, first_name, last_name
     })
 
-    console.log('Starting validation')
-
     // Validate for errors
     let errors = await user.validate()
         .then(result => result)
@@ -30,12 +28,11 @@ router.post('/register', async (request, response) => {
     if (errors) return response.status(400).json({ errors})
 
 
-    console.log('Starting to hash password')
     // Hash the password and save to database
     user.password = await bcrypt.hash(user.password, settings.bcrypt_iterations)
     await user.save();
 
-    console.log('Starting to make token')
+
     // Send response indicating success
     response.status(200).json({
         message: `Account created for ${user.email}`
@@ -46,19 +43,19 @@ router.post('/login', async (request, response) => {
     
     const { email, password } = request.body;
 
-    if (!email || !password) return response.status(400).json({error: "You need to supply an email and password."})
+    if (!email || !password) return response.status(400).json({error: "username or password missing."})
 
     let user = await User.findOne({ email })
         .then(result => result)
         .catch(error => error)
     
-    if (!user) return response.status(400).json({ error: "Incorrect credentials."})
+    if (!user) return response.status(400).json({ error: "credential error."})
 
     let comparison = await bcrypt.compare(password, user.password)
         .then(result => result)
         .catch(error => error)
 
-    if (!comparison) return response.status(400).json({ error: "Incorrect credentials."})
+    if (!comparison) return response.status(400).json({ error: "credential error."})
 
     const token = await user.makeToken();
     response.status(200).json({ token })
