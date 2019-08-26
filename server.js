@@ -43,7 +43,6 @@ app.use('/api/benefit', benefitRouter);
 app.use('/api/application', applicationRouter);
 app.use('/api/auth', userRouter);
 
-
 const port = process.env.PORT || 3001;
 
 app.listen(port, ()=> {
