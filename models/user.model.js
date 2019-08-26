@@ -43,7 +43,11 @@ const UserSchema = mongoose.Schema({
     summary: {
         type: String,
         trim: true
-    }
+    },
+    achievements: [{
+        type: String,
+        trim: true
+    }]
 },
 {
     timestamps: true
