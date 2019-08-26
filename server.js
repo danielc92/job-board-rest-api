@@ -33,9 +33,9 @@ const skillRouter = require('./routes/skill.route');
 const userRouter = require('./routes/user.route');
 const benefitRouter = require('./routes/benefit.route');
 const applicationRouter = require('./routes/application.route');
-const jobCategoryRouter = require('./routes/job_category.route');
+const categoryRouter = require('./routes/category.route');
 
-app.use('/api/job-category', jobCategoryRouter);
+app.use('/api/category', categoryRouter);
 app.use('/api/skill', skillRouter);
 app.use('/api/test', testRouter);
 app.use('/api/job', jobRouter);
