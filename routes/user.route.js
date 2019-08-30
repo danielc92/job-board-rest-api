@@ -10,7 +10,7 @@ router.post('/register', async (request, response) => {
     // First check if the email is taken
     let user = await User.findOne({ email: request.body.email })
 
-    if (user) return response.status(400).json({ message: "email unavailable."})
+    if (user) return response.status(400).json({ error: "Email is already taken."})
 
     // Decontruct variables from the post body.
     const { email, password, first_name, last_name } = request.body;
@@ -43,19 +43,19 @@ router.post('/login', async (request, response) => {
     
     const { email, password } = request.body;
 
-    if (!email || !password) return response.status(400).json({error: "username or password missing."})
+    if (!email || !password) return response.status(400).json({error: "Username or password is missing."})
 
     let user = await User.findOne({ email })
         .then(result => result)
         .catch(error => error)
     
-    if (!user) return response.status(400).json({ error: "credential error."})
+    if (!user) return response.status(400).json({ error: "Incorrect credentials were supplied."})
 
     let comparison = await bcrypt.compare(password, user.password)
         .then(result => result)
         .catch(error => error)
 
-    if (!comparison) return response.status(400).json({ error: "credential error."})
+    if (!comparison) return response.status(400).json({ error: "Incorrect credentials were supplied."})
 
     const token = await user.makeToken();
     response.status(200).json({ token })
