@@ -28,9 +28,12 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         },
-        about: {
+        about_company: {
             type: String,
-            required: true,
+            trim: true
+        },
+        about_job: {
+            type: String,
             trim: true
         },
         requirements: [{
