@@ -1,6 +1,12 @@
 # Job Board API
 Building backend for a Job Board app in Nodejs, Express.js, MongoDB and mongoose. This application will be connected to a javascript based front-end such as React in the future.
 
+### Security
+- Appropriate rate limiting to prevent abuse, particularly to content (POST) creation routes.
+- Passwords need to be slow hashed with `bcrypt/pbkf2`.
+- Users should not and cannot modify documents created by others. May need to utlilize auth middleware to achieve this.
+- Sensitive variables need to be hidden away in environment variables.
+
 ### Stack
 - MongoDB as a database
 - Mongoose ODM for modelling and validation
