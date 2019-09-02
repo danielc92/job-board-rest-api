@@ -1,8 +1,10 @@
 const Skill = require('../models/skill.model');
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/auth.middleware');
 
-router.get('/', (request, response) => {
+
+router.get('/', authMiddleware, (request, response) => {
     Skill.find()
         .then(result => response.status(200).json(result))
         .catch(error => response.status(400).json({ error }))
