@@ -49,6 +49,11 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         }],
+        postcode: {
+            type: Number,
+            required: true,
+            trim: true
+        },
         salary_range_low: {
             type: Number,
             min: 0,
