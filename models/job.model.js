@@ -49,8 +49,8 @@ const JobSchema = mongoose.Schema(
             lowercase: true,
             trim: true
         }],
-        postcode: {
-            type: Number,
+        lga_code: {
+            type: String,
             required: true,
             trim: true
         },
