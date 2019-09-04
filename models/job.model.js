@@ -51,7 +51,7 @@ const JobSchema = mongoose.Schema(
         }],
         lga_code: {
             type: String,
-            required: true,
+            required: false, //disable required until suitable dataset is found for lga codes
             trim: true
         },
         salary_range_low: {
