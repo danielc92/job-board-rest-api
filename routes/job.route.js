@@ -3,6 +3,14 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 
+// Retrieve list of jobs with few fields to reduce network bandwidth
+router.get('/list', (request, response) => {
+
+    Job.find()
+        .select('title')
+        .then(results => response.status(200).json({ results }))
+        .catch(error => response.status(400).json({ error }))
+})
 
 // Make a post request to test route
 router.post('/', authMiddleware, (request, response) => {
@@ -14,12 +22,6 @@ router.post('/', authMiddleware, (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
-// Make a get request to test route
-router.get('/', (request, response) => {
 
-    Job.find()
-        .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error }))
-})
 
 module.exports = router;

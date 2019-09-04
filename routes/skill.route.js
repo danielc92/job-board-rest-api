@@ -6,9 +6,11 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 router.get('/', authMiddleware, (request, response) => {
     Skill.find()
+        .select('name')
         .then(result => response.status(200).json(result))
         .catch(error => response.status(400).json({ error }))
 })
+
 
 router.post('/', async (request, response) => {
     
