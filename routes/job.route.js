@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/auth.middleware');
 router.get('/list', (request, response) => {
 
     Job.find()
-        .select('title')
+        .select('title job_summary salary_range_low salary_range_high')
         .sort({ createdAt: -1})
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
