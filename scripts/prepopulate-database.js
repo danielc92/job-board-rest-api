@@ -11,5 +11,13 @@ db.once('open', function() {
     console.log(`Successfully connected to MongoDB on ${uri}.`);
 })
 
+// Import models
 const Skill = require('../models/skill.model');
-Skill.insertMany
+const User = require('../models/user.model');
+const Benefit = require('../models/benefit.model');
+const Category = require('../models/category.model');
+
+
+
+//
+
