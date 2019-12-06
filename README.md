@@ -31,6 +31,13 @@ npm install nodemon
 nodemon server.js
 ```
 
+### Running MongoDB in Docker
+Required to install docker desktop, and install the `mongo` image.
+The following command will run a container based on the mongo image, mapping the containers port 27017 to the hosts 27017 in detached mode (runs as background process). Volume hasn't been mounted in order to keep the environment even more portable (a script will be required to prepopulate the database within the container).
+```sh
+docker run --name mongo-instance -d -p 27017:27017 mongo
+```
+
 ### Tests
 - Testing all routes and methods using `postman`
 
