@@ -56,10 +56,15 @@ benefitsData.map(name => {
     })
 })
 
+const bcrypt = require('bcrypt');
+const settings = require('../settings');
 
+const password = '123456789'
+const hashedPassword = bcrypt.hashSync(password, settings.bcrypt_iterations);
+console.log('this is hashed password', hashedPassword)
 User.create({
     email: "test@test.com",
-    password: "123456789",
+    password: hashedPassword,
     first_name: "john",
     last_name: "doe",
 })

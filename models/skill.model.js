@@ -5,7 +5,7 @@ const SkillSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: 20,
+        maxlength: 30,
         minlength: 1,
         lowercase: true
     }
