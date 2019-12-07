@@ -1,4 +1,5 @@
 const Job = require('../models/job.model');
+const mongoosePaginate = require(',ong')
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
