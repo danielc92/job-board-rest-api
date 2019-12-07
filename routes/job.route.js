@@ -1,15 +1,19 @@
 const Job = require('../models/job.model');
-const mongoosePaginate = require(',ong')
+const mongoosePaginate = require('mongoose-paginate-v2');
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list', (request, response) => {
+    
+    const query = {};
+    const options = {
+        select: 'title job_summary salary_range_low salary_range_high',
+        sort: { createdAt: 'desc' },
+    };
 
-    Job.find()
-        .select('title job_summary salary_range_low salary_range_high')
-        .sort({ createdAt: -1})
+    Job.paginate(query, options)
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
 })
