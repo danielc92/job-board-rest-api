@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 
 const LocationSchema = mongoose.Schema({
     location: {
-        type: {},
-        coordinates: {}
+        type: {
+            type: String,
+            default: 'Point'
+        },
+        coordinates: {
+            type: [Number]
+        }
     },
     state: {
         type: String,
