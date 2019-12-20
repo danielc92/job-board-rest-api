@@ -67,6 +67,19 @@ const JobSchema = mongoose.Schema(
         },
         closes: {
             type: Date
+        },
+        location: {
+            type: {
+                type: String,
+                default: 'Point'
+            },
+            coordinates: {
+                type: [Number],
+                default: [0, 0]
+            }
+        },
+        location_string: {
+            type: String
         }
     },
     {

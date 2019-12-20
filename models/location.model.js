@@ -7,14 +7,12 @@ const LocationSchema = mongoose.Schema({
             default: 'Point'
         },
         coordinates: {
-            type: [Number]
+            type: [Number],
+            default: [0, 0]
         }
     },
-    state: {
-        type: String,
-        required: true,
-    },
-    merged: String,
+    state: String,
+    location_string: String,
     postcode: Number,
     locality: String,
 
