@@ -16,6 +16,9 @@ const LocationSchema = mongoose.Schema({
     postcode: Number,
     locality: String,
 
+},
+{
+    timestamps: true
 })
 
 const Location = mongoose.model('Location', LocationSchema);
