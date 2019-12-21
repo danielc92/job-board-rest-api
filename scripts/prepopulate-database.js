@@ -56,6 +56,8 @@ benefitsData.map(name => {
     })
 })
 
+
+// Create a test user
 const bcrypt = require('bcrypt');
 const settings = require('../settings');
 
@@ -70,3 +72,80 @@ User.create({
 })
 .then(result => console.log(result))
 .catch(error => console.log(error))
+
+// Insert Location data
+const Location = require('../models/location.model');
+
+const new_south_wales = require('../locality/NSW.json');
+const northern_territory = require('../locality/NT.json');
+const queensland = require('../locality/QLD.json');
+const south_australia = require('../locality/SA.json');
+const tasmania = require('../locality/TAS.json'); 
+const victoria = require('../locality/VIC.json');
+const western_australia = require('../locality/WA.json');
+
+
+function returnFullState(CODE) {
+    let fullState;
+    switch (CODE) {
+        case 'NSW':
+            fullState = 'New South Wales (NSW)';
+            break;
+        case 'NT':
+            fullState = 'Northern Territory (NT)';
+            break;
+        case 'QLD':
+            fullState = 'Queensland (QLD)';
+            break;
+        case 'SA':
+            fullState = 'South Australia (SA)';
+            break;
+        case 'TAS':
+            fullState = 'Tasmania (TAS)';
+            break;
+        case 'VIC':
+            fullState = 'Victoria (VIC)';
+            break;
+        case 'WA':
+            fullState = 'Western Australia (WA)';
+            break;
+        default:
+            fullState = null
+    }
+
+    return fullState;
+}
+
+function bulkInsertState(locations) {
+    const locations_new = locations.map(item => {
+        
+        const {POSTCODE, STATE_CODE, LOCALITY_NAME, LONGITUDE, LATITUDE} = item;
+        const STATE_STRING = returnFullState(STATE_CODE)
+
+        const new_item = {
+            location: {
+                coordinates: [LONGITUDE, LATITUDE]
+            },
+            state: STATE_CODE,
+            location_string: `${LOCALITY_NAME}, ${POSTCODE}, ${STATE_STRING}`,
+            postcode: POSTCODE,
+            locality: LOCALITY_NAME,
+            
+        }
+        return new_item
+    })
+
+    Location.insertMany(locations_new)
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+}
+
+
+bulkInsertState(new_south_wales);
+bulkInsertState(northern_territory);
+bulkInsertState(queensland);
+bulkInsertState(south_australia);
+bulkInsertState(tasmania);
+bulkInsertState(victoria);
+bulkInsertState(western_australia);
+
