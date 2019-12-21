@@ -21,6 +21,9 @@ const LocationSchema = mongoose.Schema({
     timestamps: true
 })
 
+//Text index for full text search.
+LocationSchema.index({location_string: 'text'})
+
 const Location = mongoose.model('Location', LocationSchema);
 
 module.exports = Location
