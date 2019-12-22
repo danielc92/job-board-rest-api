@@ -10,19 +10,12 @@ const JobSchema = mongoose.Schema(
             trim: true
         },
         category: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category',
+            type: String,
             required: true,
             trim: true
         },
-        benefits: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Benefit'
-        }],
-        skills: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Skill' 
-        }],
+        benefits: [String],
+        skills: [String],
         title: {
             type: String,
             required: true,
