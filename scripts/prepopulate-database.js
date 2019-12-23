@@ -23,54 +23,31 @@ const Category = require('../models/category.model');
 const skillsList = require('../data/skills.json');
 const categoriesList = require('../data/categories.json');
 const benefitsList = require('../data/benefits.json');
+const titlesList = require('../data/titles.json');
 
 
-// Inject Dummy data
-skillsData.map(name => {
-    Skill.create({
-        name
-    }).then(result => {
-        console.log('Successfully inserted: ', result);
-    }).catch(error => {
-        console.log(error)
-    })
-})
 
-categoriesData.map(name => {
-    Category.create({
-        name
-    }).then(result => {
-        console.log('Successfully inserted: ', result);
-    }).catch(error => {
-        console.log(error)
-    })
-})
-
+// Benefits
 benefitsData = benefitsList.map(name => ({ name }))
 
 Benefit.insertMany(benefitsData)
-.then(r => console.log('Successfully insert benefits'))
+.then(r => console.log('Successfully insert benefits.'))
 .catch(e => console.log(e))
 
+// Skills
+skillsData = skillsList.map(name => ({ name }))
 
-// Create a test user
-const bcrypt = require('bcrypt');
-const settings = require('../settings');
-let user = {}
-const password = '123456789'
-const hashedPassword = bcrypt.hashSync(password, settings.bcrypt_iterations);
-console.log('this is hashed password', hashedPassword)
-User.create({
-    email: "test@test.com",
-    password: hashedPassword,
-    first_name: "john",
-    last_name: "doe",
-})
-.then(result => {
-    console.log('Successfully created user: ', user)
-    user = result;
-})
-.catch(error => console.log(error))
+Skill.insertMany(skillsData)
+.then(r => console.log('Successfully insert skills.'))
+.catch(e => console.log(e))
+
+// Categories
+categoriesData = categoriesList.map(name => ({ name }))
+
+Category.insertMany(categoriesData)
+.then(r => console.log('Successfully insert categories.'))
+.catch(e => console.log(e))
+
 
 // Insert Location data
 const Location = require('../models/location.model');
@@ -151,44 +128,66 @@ bulkInsertState(western_australia);
 
 //  Bulk insert Jobs
 
+const Job = require('../models/job.model');
+
 function choice(array) {
     let length = array.length > 7 ? 7 : array.length;
     let itemsToTake = Math.floor(Math.random() * length) + 1
     return array.slice(0, itemsToTake);
 }
 
-console.log(user)
+// Create a test user
+const bcrypt = require('bcrypt');
+const settings = require('../settings');
+const password = '123456789'
+const hashedPassword = bcrypt.hashSync(password, settings.bcrypt_iterations);
+let user = {
+    email: "test@test.com",
+    password: hashedPassword,
+    first_name: "john",
+    last_name: "doe",
+}
 
-const jobDataNew = new Array(300).fill(null).map(item => {
-    const jobItem = {
-        creator_id: user._id,
-        category: "general",
-        title: titlesList[Math.floor(Math.random() * titlesList.length)],
-        skills: choice(skillsList),
-        benefits: choice(benefitsList),
-        company_summary: "This is a great company based in X, we specialize in Y and we are currently hiring for a new employee in a particular department.",
-        job_summary: "This is a summary about the job, find below more details.",
-        contact_summary: "04 0000 0000 or contact me on test@test.com via outlook.",
-        requirements: [],
-        salary_range_low: Math.floor(Math.random() * 20000),
-        salary_range_high: Math.floor(Math.random() * 200000),
-        location_string: "SUNSHINE WEST, 3020, Victoria (VIC)",
-        location: {
-            "type" : "Point",
-            "coordinates" : [
-                    144.8349834286,
-                    -37.7881136176
-            ]
-        },
 
-    }
-    return jobItem
+
+User.create(user)
+.then(result => {
+    console.log('Successfully created a user')
+    let jobData = new Array(150).fill(null).map(item => {
+        const jobItem = {
+            creator_id: result._id,
+            category: "general",
+            title: titlesList[Math.floor(Math.random() * titlesList.length)],
+            skills: choice(skillsList),
+            benefits: choice(benefitsList),
+            company_summary: "This is a great company based in X, we specialize in Y and we are currently hiring for a new employee in a particular department.",
+            job_summary: "This is a summary about the job, find below more details.",
+            contact_summary: "04 0000 0000 or contact me on test@test.com via outlook.",
+            requirements: [],
+            salary_range_low: Math.floor(Math.random() * 20000),
+            salary_range_high: Math.floor(Math.random() * 200000),
+            location_string: "SUNSHINE WEST, 3020, Victoria (VIC)",
+            location: {
+                "type" : "Point",
+                "coordinates" : [
+                        144.8349834286,
+                        -37.7881136176
+                ]
+            },
+    
+        }
+        return jobItem
+    })
+
+    Job
+    .insertMany(jobData)
+    .then(result => console.log('Insert many jobs'))
+    .catch(error => console.log('Failed to insert jobs'))
 })
+.catch(error => console.log(error))
 
-const Job = require('../models/job.model');
 
-Job.insertMany(jobDataNew)
-.then(result => console.log('Insert many jobs'))
-.catch(error => console.log('Failed to insert jobs'))
+
+
 
 
