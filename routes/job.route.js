@@ -6,8 +6,20 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list', (request, response) => {
-    
-    const query = {};
+    const { title, location } = request.query;
+    let query = {};
+
+    // Exact match for now, until text search is fleshed out.
+    if (title) {
+        query = { ...query, title }
+    }
+
+    if(location) {
+        query = { ...query, location_string: location }
+    }
+
+    console.log(query, ' :: QUERY');
+
     const options = {
         select: 'title job_summary salary_range_low salary_range_high',
         sort: { createdAt: 'desc' },
