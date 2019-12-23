@@ -1,0 +1,60 @@
+[
+    {
+        "_id" : ObjectId("5e0026794f24c11d5c9f72e9"),
+        "location" : {
+                "type" : "Point",
+                "coordinates" : [
+                        144.8349834286,
+                        -37.7881136176
+                ]
+        },
+        "benefits" : [
+                "competitive salary",
+                "competitive superannuation",
+                "company car",
+                "free parking",
+                "5 weeks annual leave"
+        ],
+        "skills" : [
+                "collaboration",
+                "leadership",
+                "journalism",
+                "analytical reasoning",
+                "corporate communications"
+        ],
+        "requirements" : [ ],
+        "title" : "master",
+        "category" : "general labor",
+        "company_summary" : "a",
+        "job_summary" : "a",
+        "contact_summary" : "a",
+        "salary_range_high" : 50000,
+        "salary_range_low" : 40000,
+        "creator_id" : ObjectId("5dfdf78a373d100190728420"),
+        "location_string" : "SUNSHINE, 3020, Victoria (VIC)",
+        "createdAt" : ISODate("2019-12-23T02:29:13.461Z"),
+        "updatedAt" : ISODate("2019-12-23T02:29:13.461Z"),
+        "__v" : 0
+}
+{
+        "location" : {
+                "type" : "Point",
+                "coordinates" : [
+                        144.8087211938,
+                        -37.7949602901
+                ]
+        },
+        "requirements": [
+            "requirement number 1",
+            "requirement number 2",
+            "requirement number 3",
+            "requirement number 4",
+            "requirement number 5"
+        ],
+        "title" : "master",
+        "category" : "accounting",
+        "salary_range_high" : 50000,
+        "salary_range_low" : 40000,
+        "location_string" : "SUNSHINE WEST, 3020, Victoria (VIC)",
+}
+]

@@ -20,9 +20,9 @@ const Category = require('../models/category.model');
 
 
 // Import Dummy data
-const skillsData = require('../data/skills.json');
-const categoriesData = require('../data/categories.json');
-const benefitsData = require('../data/benefits.json');
+const skillsList = require('../data/skills.json');
+const categoriesList = require('../data/categories.json');
+const benefitsList = require('../data/benefits.json');
 
 
 // Inject Dummy data
@@ -46,21 +46,17 @@ categoriesData.map(name => {
     })
 })
 
-benefitsData.map(name => {
-    Benefit.create({
-        name
-    }).then(result => {
-        console.log('Successfully inserted: ', result);
-    }).catch(error => {
-        console.log(error)
-    })
-})
+benefitsData = benefitsList.map(name => ({ name }))
+
+Benefit.insertMany(benefitsData)
+.then(r => console.log('Successfully insert benefits'))
+.catch(e => console.log(e))
 
 
 // Create a test user
 const bcrypt = require('bcrypt');
 const settings = require('../settings');
-
+let user = {}
 const password = '123456789'
 const hashedPassword = bcrypt.hashSync(password, settings.bcrypt_iterations);
 console.log('this is hashed password', hashedPassword)
@@ -70,7 +66,10 @@ User.create({
     first_name: "john",
     last_name: "doe",
 })
-.then(result => console.log(result))
+.then(result => {
+    console.log('Successfully created user: ', user)
+    user = result;
+})
 .catch(error => console.log(error))
 
 // Insert Location data
@@ -136,7 +135,7 @@ function bulkInsertState(locations) {
     })
 
     Location.insertMany(locations_new)
-    .then(result => console.log(result))
+    .then(result => console.log('Successully inserted bulk locations'))
     .catch(error => console.log(error))
 }
 
@@ -148,4 +147,48 @@ bulkInsertState(south_australia);
 bulkInsertState(tasmania);
 bulkInsertState(victoria);
 bulkInsertState(western_australia);
+
+
+//  Bulk insert Jobs
+
+function choice(array) {
+    let length = array.length > 7 ? 7 : array.length;
+    let itemsToTake = Math.floor(Math.random() * length) + 1
+    return array.slice(0, itemsToTake);
+}
+
+console.log(user)
+
+const jobDataNew = new Array(300).fill(null).map(item => {
+    const jobItem = {
+        creator_id: user._id,
+        category: "general",
+        title: titlesList[Math.floor(Math.random() * titlesList.length)],
+        skills: choice(skillsList),
+        benefits: choice(benefitsList),
+        company_summary: "This is a great company based in X, we specialize in Y and we are currently hiring for a new employee in a particular department.",
+        job_summary: "This is a summary about the job, find below more details.",
+        contact_summary: "04 0000 0000 or contact me on test@test.com via outlook.",
+        requirements: [],
+        salary_range_low: Math.floor(Math.random() * 20000),
+        salary_range_high: Math.floor(Math.random() * 200000),
+        location_string: "SUNSHINE WEST, 3020, Victoria (VIC)",
+        location: {
+            "type" : "Point",
+            "coordinates" : [
+                    144.8349834286,
+                    -37.7881136176
+            ]
+        },
+
+    }
+    return jobItem
+})
+
+const Job = require('../models/job.model');
+
+Job.insertMany(jobDataNew)
+.then(result => console.log('Insert many jobs'))
+.catch(error => console.log('Failed to insert jobs'))
+
 
