@@ -148,12 +148,14 @@ let user = {
     last_name: "doe",
 }
 
-
+const locationList = require('../data/locations.json');
 
 User.create(user)
 .then(result => {
     console.log('Successfully created a user')
     let jobData = new Array(150).fill(null).map(item => {
+        
+        const randomLocation = choice(locationList)
         const jobItem = {
             creator_id: result._id,
             category: "general",
@@ -166,14 +168,8 @@ User.create(user)
             requirements: [],
             salary_range_low: Math.floor(Math.random() * 20000),
             salary_range_high: Math.floor(Math.random() * 200000),
-            location_string: "SUNSHINE WEST, 3020, Victoria (VIC)",
-            location: {
-                "type" : "Point",
-                "coordinates" : [
-                        144.8349834286,
-                        -37.7881136176
-                ]
-            },
+            location_string: randomLocation.location_string,
+            location: randomLocation.location,
     
         }
         return jobItem
