@@ -6,8 +6,10 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list', (request, response) => {
-    const { title, location, page } = request.query;
+    const { title, location_string, page } = request.query;
     let query = {};
+
+    console.log('request query', request.query)
 
     // Build the query from query string parameters.
     if (title) {
@@ -19,9 +21,13 @@ router.get('/list', (request, response) => {
         }
     }
 
-    if(location) {
-        query = { ...query, location_string: location }
+    if(location_string) {
+        query = { 
+            ...query, 
+            location_string }
     }
+
+    console.log(query)
 
     // Build options
     let options = {

@@ -136,6 +136,12 @@ function choice(array) {
     return array.slice(0, itemsToTake);
 }
 
+function choiceItem(array) {
+    let length = array.length;
+    let index = Math.floor(Math.random() * length);
+    return array[index];
+}
+
 // Create a test user
 const bcrypt = require('bcrypt');
 const settings = require('../settings');
@@ -152,10 +158,10 @@ const locationList = require('../data/locations.json');
 
 User.create(user)
 .then(result => {
-    console.log('Successfully created a user')
     let jobData = new Array(150).fill(null).map(item => {
         
-        const randomLocation = choice(locationList)
+        const randomLocation = choiceItem(locationList)
+        console.log(randomLocation)
         const jobItem = {
             creator_id: result._id,
             category: "general",
