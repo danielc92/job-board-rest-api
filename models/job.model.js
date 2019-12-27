@@ -75,5 +75,6 @@ const JobSchema = mongoose.Schema(
     })
 
 JobSchema.plugin(mongoosePaginate);
+JobSchema.index({title: "text"})
 
 module.exports = mongoose.model('Job', JobSchema)

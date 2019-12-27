@@ -11,7 +11,12 @@ router.get('/list', (request, response) => {
 
     // Build the query from query string parameters.
     if (title) {
-        query = { ...query, title }
+        query = { 
+            ...query, 
+            "$text": { 
+                "$search" : title 
+            } 
+        }
     }
 
     if(location) {
