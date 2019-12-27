@@ -4,7 +4,7 @@ const Location = require('../models/location.model');
 const authMiddleware = require('../middleware/auth.middleware');
 const limit = 16;
 
-router.get('/', authMiddleware, (request, response) => {
+router.get('/', (request, response) => {
     const { search } = request.query;
     const query = search ? { "$text": { "$search": search }} : {}
     Location.find(query)
