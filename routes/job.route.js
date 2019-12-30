@@ -6,9 +6,12 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 router.get('/', (request, response) => {
     const { id } = request.query;
-    if (!id) return response.status(400).json({error: "No id supplied."})
+
+    if (!id) return response.status(400).json({error: "Job id field is required."})
+
+    // Minus unwanted fields
     Job.findById(id)
-    // .select('title')
+    .select('-__v -location -creator_id -updatedAt') 
     .then(results => response.status(200).json({ results }))
     .catch(error => response.status(400).json({ error }))
 })
