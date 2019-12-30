@@ -4,12 +4,19 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 
+router.get('/', (request, response) => {
+    const { id } = request.query;
+    if (!id) return response.status(400).json({error: "No id supplied."})
+    Job.findById(id)
+    // .select('title')
+    .then(results => response.status(200).json({ results }))
+    .catch(error => response.status(400).json({ error }))
+})
+
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list', (request, response) => {
     const { title, location_string, page } = request.query;
     let query = {};
-
-    console.log('request query', request.query)
 
     // Build the query from query string parameters.
     if (title) {
@@ -26,8 +33,6 @@ router.get('/list', (request, response) => {
             ...query, 
             location_string }
     }
-
-    console.log(query)
 
     // Build options
     let options = {
