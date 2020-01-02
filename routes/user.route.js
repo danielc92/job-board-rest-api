@@ -13,11 +13,11 @@ router.post('/register', async (request, response) => {
     if (user) return response.status(400).json({ error: "Email is already taken."})
 
     // Decontruct variables from the post body.
-    const { email, password, first_name, last_name } = request.body;
+    const { email, password, first_name, last_name, is_employer } = request.body;
     
     // Create a new User object
     user = new User({
-        email, password, first_name, last_name
+        email, password, first_name, last_name, is_employer
     })
 
     // Validate for errors

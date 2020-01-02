@@ -31,6 +31,10 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    is_employer: {
+        type: Boolean,
+        default: false,
+    },
     skills: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Skill'
