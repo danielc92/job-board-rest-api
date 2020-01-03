@@ -32,4 +32,12 @@ router.get('/', (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
+router.get('/list', (request, response) => {
+
+    const { applicant_id, job_id } = request.query;
+    Application.find({ applicant_id, job_id })
+        .then(results => response.status(200).json({ results }))
+        .catch(error => response.status(400).json({ error }))
+})
+
 module.exports = router;

@@ -70,7 +70,8 @@ UserSchema.methods.makeToken = function() {
     const tokenHash = jwt.sign(
         {
             _id: this._id,
-            email: this.email
+            email: this.email,
+            is_employer: this.is_employer,
         },
         settings.token_secret,
         {
