@@ -62,5 +62,15 @@ router.post('/login', async (request, response) => {
 
 })
 
+router.get('/', async (request, response) => {
+    const { id } = request.query;
+
+    User.findOne({ _id: id })
+    .select('-password -admin')
+    .then(results => response.status(200).json({ results }))
+    .catch(error => response.status(400).json({ error }))
+
+})
+
 
 module.exports = router;
