@@ -13,7 +13,7 @@ const JobApplicationSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "in progress",
+        default: "pending",
         trim: true,
         lowercase: true
     },
