@@ -6,8 +6,10 @@ const router = express.Router();
 
 
 router.patch('/', async (request, response) => {
-    const { applicant_id, job_id } = request.query;
-    const update = { status: 'withdrawn'}
+    const { applicant_id, job_id, status } = request.query;
+    if (!applicant_id || !job_id || !status) return response.status(400).json({ error: 'A value has been omitted.'})
+    
+    const update = { status }
     const query = { applicant_id, job_id }
 
     JobApplication.findOneAndUpdate(query, update)
