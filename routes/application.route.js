@@ -3,7 +3,17 @@ const User = require('../models/user.model');
 const Job = require('../models/job.model');
 const express = require('express');
 const router = express.Router();
-// const {} = 
+
+
+router.patch('/', async (request, response) => {
+    const { applicant_id, job_id } = request.query;
+    const update = { status: 'withdrawn'}
+    const query = { applicant_id, job_id }
+
+    JobApplication.findOneAndUpdate(query, update)
+    .then(result => response.status(200).json({ message: "Successfully updated."}))
+    .catch(error => response.status(400).json({ error }))
+})
 
 router.post('/', async (request, response) => {
 
