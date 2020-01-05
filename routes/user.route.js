@@ -35,7 +35,7 @@ router.post('/register', async (request, response) => {
 
     // Send response indicating success
     response.status(200).json({
-        message: `Account created for ${user.email}`
+        message: `Account has been successfully created for ${user.email}`
     })
 })
 
