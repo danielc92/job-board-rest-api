@@ -54,6 +54,32 @@ router.get('/list', (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
+// Retrieve list of jobs with few fields to reduce network bandwidth
+router.get('/list/employer', authMiddleware, (request, response) => {
+    const { page, creator_id } = request.query;
+    console.log(request,'THIS REQUEST')
+    if (!creator_id) return response.status(400).json({ error: 'creator_id field must be supplied.'})
+    let query = {
+        creator_id
+    };
+
+    // Build options
+    let options = {
+        select: 'title job_summary createdAt',
+        sort: { createdAt: 'desc' },
+        limit: 2,
+    };
+
+    // Append page number
+    if (page) {
+        options = { ...options, page }
+    }
+
+    Job.paginate(query, options)
+        .then(results => response.status(200).json({ results }))
+        .catch(error => response.status(400).json({ error }))
+})
+
 // Make a post request to test route
 router.post('/', authMiddleware, (request, response) => {
 
