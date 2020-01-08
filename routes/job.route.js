@@ -67,7 +67,7 @@ router.get('/list/employer', authMiddleware, (request, response) => {
     let options = {
         select: 'title job_summary createdAt',
         sort: { createdAt: 'desc' },
-        limit: 2,
+        limit: 5,
     };
 
     // Append page number
