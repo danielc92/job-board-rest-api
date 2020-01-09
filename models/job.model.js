@@ -56,6 +56,10 @@ const JobSchema = mongoose.Schema(
         closes: {
             type: Date
         },
+        open: {
+            type: Boolean,
+            default: true,
+        },
         location: {
             type: {
                 type: String,
