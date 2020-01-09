@@ -3,7 +3,7 @@ const User = require('../models/user.model');
 const Job = require('../models/job.model');
 const express = require('express');
 const router = express.Router();
-
+const select = require('../constants/select');
 
 router.patch('/', async (request, response) => {
     const { applicant_id, job_id, status } = request.query;
@@ -59,7 +59,7 @@ router.get('/list', (request, response) => {
     JobApplication.find({ applicant_id})
         .populate({
             path: 'job_id',
-            select: 'title'
+            select: select.GET_APPLICATION_LIST
         })
         .sort('-createdAt')
         .then(results => response.status(200).json({ results }))

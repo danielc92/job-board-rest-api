@@ -3,6 +3,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
+const select = require('../constants/select');
 
 router.get('/', (request, response) => {
     const { id } = request.query;
@@ -11,7 +12,7 @@ router.get('/', (request, response) => {
 
     // Minus unwanted fields
     Job.findById(id)
-    .select('-__v -location -creator_id -updatedAt') 
+    .select(select.GET_JOB) 
     .then(results => response.status(200).json({ results }))
     .catch(error => response.status(400).json({ error }))
 })
@@ -39,7 +40,7 @@ router.get('/list', (request, response) => {
 
     // Build options
     let options = {
-        select: 'title job_summary salary_range_low salary_range_high',
+        select: select.GET_JOB_LIST_SEEKER,
         sort: { createdAt: 'desc' },
         limit: 5,
     };
@@ -65,7 +66,7 @@ router.get('/list/employer', authMiddleware, (request, response) => {
 
     // Build options
     let options = {
-        select: 'title job_summary createdAt',
+        select: select.GET_JOB_LIST_EMPLOYER,
         sort: { createdAt: 'desc' },
         limit: 5,
     };

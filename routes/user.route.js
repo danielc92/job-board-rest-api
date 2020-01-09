@@ -3,7 +3,7 @@ const express = require('express');
 const settings = require('../settings');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
+const select = require('../constants/select')
 
 router.post('/register', async (request, response) => {
     
@@ -66,7 +66,7 @@ router.get('/', async (request, response) => {
     const { id } = request.query;
 
     User.findOne({ _id: id })
-    .select('-password -admin')
+    .select(select.GET_USER)
     .then(results => response.status(200).json({ results }))
     .catch(error => response.status(400).json({ error }))
 
