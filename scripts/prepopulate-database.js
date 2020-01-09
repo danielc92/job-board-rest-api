@@ -152,13 +152,14 @@ let user = {
     password: hashedPassword,
     first_name: "john",
     last_name: "doe",
+    is_employer: true,
 }
 
 const locationList = require('../data/locations.json');
 
 User.create(user)
 .then(result => {
-    let jobData = new Array(150).fill(null).map(item => {
+    let jobData = new Array(80).fill(null).map(item => {
         
         const randomLocation = choiceItem(locationList)
         console.log(randomLocation)
@@ -189,7 +190,18 @@ User.create(user)
 .catch(error => console.log(error))
 
 
+const password2 = '123456789'
+const hashedPassword2 = bcrypt.hashSync(password2, settings.bcrypt_iterations);
+let user2 = {
+    email: "test2@test.com",
+    password: hashedPassword2,
+    first_name: "Jane",
+    last_name: "Doe",
+    is_employer: false,
+}
 
-
+User.create(user2)
+.then(result => console.log(user2, ' was created'))
+.catch(e => console.log(e))
 
 
