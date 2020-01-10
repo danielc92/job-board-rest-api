@@ -58,7 +58,7 @@ router.get('/list', (request, response) => {
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list/employer', authMiddleware, (request, response) => {
     const { page, creator_id } = request.query;
-    console.log(request,'THIS REQUEST')
+
     if (!creator_id) return response.status(400).json({ error: 'creator_id field must be supplied.'})
     let query = {
         creator_id
@@ -68,7 +68,7 @@ router.get('/list/employer', authMiddleware, (request, response) => {
     let options = {
         select: select.GET_JOB_LIST_EMPLOYER,
         sort: { createdAt: 'desc' },
-        limit: 5,
+        limit: 10,
     };
 
     // Append page number
