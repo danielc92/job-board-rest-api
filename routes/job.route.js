@@ -91,6 +91,26 @@ router.post('/', authMiddleware, (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
+// Update job status
+router.put('/', authMiddleware, (request, response) => {
+    // Store query
+    const { creator_id, job_id } = request.query;
+    
+    // Check if params exist
+    if (!job_id) return response.status(400).json({ error: "Missing job_id field."})
+    if (!creator_id) return response.status(400).json({ error: "Missing creator_id field."})
+    
+    // Check if out of scope
+    const scopeMatch = (request.user._id === creator_id);
+    if (!scopeMatch) return response.status(400).json({ error: "This job does not belong to you."})
+
+    query = { _id: job_id, creator_id }
+    update = { open: false }
+    Job.findOneAndUpdate(query, update)
+    .then(result => response.status(200).json({ message: 'Successfully updated job status to closed.' }))
+    .catch(error => response.status(400).json({ error }))
+})
+
 
 
 module.exports = router;
