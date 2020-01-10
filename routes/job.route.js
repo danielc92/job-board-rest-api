@@ -92,7 +92,7 @@ router.post('/', authMiddleware, (request, response) => {
 })
 
 // Update job status
-router.put('/', authMiddleware, (request, response) => {
+router.patch('/', authMiddleware, (request, response) => {
     // Store query
     const { creator_id, job_id } = request.query;
     

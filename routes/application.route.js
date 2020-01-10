@@ -28,7 +28,7 @@ router.post('/', async (request, response) => {
     
         let jobExists = await Job.findOne({ _id: job_id })
         if (!jobExists) return response.status(400).json({ error: "Job does not exist"})
-    
+        if (!jobExists.open) return response.status(400).json({ error: "Job has been closed, you cannot apply to this job."})
         let applicationExists = await JobApplication.findOne({ applicant_id, job_id})
         if (applicationExists) return response.status(400).json({ error: "You've already applied for this job."})
     }
