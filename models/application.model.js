@@ -17,6 +17,12 @@ const JobApplicationSchema = mongoose.Schema({
         trim: true,
         lowercase: true
     },
+    user_message: {
+        type: String,
+        default: null,
+        trim: true,
+        maxlength: 500,
+    },
     rating: {
         type: Number,
         default: 0
