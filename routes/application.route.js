@@ -85,8 +85,15 @@ router.get('/list/employer', authMiddleware, async (request, response) => {
     const query = { job_id }
 
     JobApplication.find(query)
+    .populate({
+            path: 'applicant_id',
+            select: 'first_name last_name email'
+    })
     .then(results => response.status(200).json({ results }))
-    .catch(error => response.status(400).json({ message: "Failed to fetch the results"}))
+    .catch(error => {
+        console.log(error)
+        return response.status(400).json({ message: "Failed to fetch the results"})
+    })
 })
 
 module.exports = router;
