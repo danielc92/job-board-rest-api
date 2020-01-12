@@ -4,6 +4,8 @@ const Job = require('../models/job.model');
 const express = require('express');
 const router = express.Router();
 const select = require('../constants/select');
+const authMiddleware = require('../middleware/auth.middleware');
+const mongoose = require('mongoose')
 
 router.patch('/', async (request, response) => {
     const { applicant_id, job_id, status } = request.query;
@@ -35,14 +37,13 @@ router.post('/', async (request, response) => {
     catch {
         return response.status(400).json({ error: "Invalid id."})
     }
-   
 
     const application = new JobApplication({
         applicant_id, job_id
     })
     
     application.save()
-        .then(result => response.status(200).json({ result }))
+        .then(result => response.status(200).json({ message: "You have successfully applied for this job." }))
         .catch(error => response.status(400).json({ error }))
 })
 
@@ -64,6 +65,28 @@ router.get('/list', (request, response) => {
         .sort('-createdAt')
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
+})
+
+router.get('/list/employer', authMiddleware, async (request, response) => {
+    
+    // Check if the job belongs to the employer
+    const { job_id } = request.query;
+    if (!job_id) return response.status(400).json({ message: "Job_id was not supplied."})
+    try {
+        let jobExists = await Job.findOne({ _id: job_id })
+        if (!jobExists) return response.status(400).json({ message: "This job does not exist" })
+        if (String(jobExists.creator_id) !== request.user._id) return response.status(400).json({ message: "This job does not belong to you."}) 
+    }
+    catch {
+        return response.status(400).json({ message: "Unknown error occured."})
+    }
+
+    // Return the results
+    const query = { job_id }
+
+    JobApplication.find(query)
+    .then(results => response.status(200).json({ results }))
+    .catch(error => response.status(400).json({ message: "Failed to fetch the results"}))
 })
 
 module.exports = router;
