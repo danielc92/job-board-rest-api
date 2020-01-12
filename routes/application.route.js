@@ -22,7 +22,7 @@ router.patch('/', async (request, response) => {
 router.post('/', async (request, response) => {
 
     // First store the request body
-    const { applicant_id, job_id } = request.body;
+    const { applicant_id, job_id, user_message } = request.body;
 
     try {
         let userExists = await User.findOne({ _id: applicant_id })
@@ -39,7 +39,7 @@ router.post('/', async (request, response) => {
     }
 
     const application = new JobApplication({
-        applicant_id, job_id
+        applicant_id, job_id, user_message
     })
     
     application.save()
