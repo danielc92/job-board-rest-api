@@ -21,7 +21,7 @@ const JobApplicationSchema = mongoose.Schema({
         type: String,
         default: null,
         trim: true,
-        maxlength: 500,
+        maxlength: 1000,
     },
     rating: {
         type: Number,
