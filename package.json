@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-redis-start": "docker run --name redis-instance -d -p 6379:6379 redis",
     "dev-mongo-start": "docker run --name mongo-instance -d -p 27017:27017 mongo",
     "dev-mongo-populate": "node ./scripts/prepopulate-database.js",
     "server": "nodemon server.js"
