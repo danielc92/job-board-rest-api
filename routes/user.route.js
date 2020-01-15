@@ -4,6 +4,7 @@ const settings = require('../settings');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const select = require('../constants/select')
+const CareerStatModel = require('../models/career_stats.model');
 
 router.post('/register', async (request, response) => {
     
@@ -31,6 +32,12 @@ router.post('/register', async (request, response) => {
     // Hash the password and save to database
     user.password = await bcrypt.hash(user.password, settings.bcrypt_iterations)
     await user.save();
+
+    let career_stat = new CareerStatModel({
+        user_id: user._id
+    })
+
+    await career_stat.save();
 
 
     // Send response indicating success

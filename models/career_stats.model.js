@@ -17,6 +17,10 @@ const CareerStatSchema = mongoose.Schema({
         type: [String],
         default: [],
     },
+    experience: {
+        type: [Object],
+        default: [],
+    },
     achievements: {
         type: [Object],
         default: [],

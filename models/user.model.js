@@ -35,31 +35,6 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    skills: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Skill'
-    }],
-    availability: {
-        type: Boolean,
-        lowercase: true,
-        trim: true
-    },
-    summary: {
-        type: String,
-        trim: true
-    },
-    achievements: {
-        type: String,
-        trim: true
-    },
-    education: {
-        type: String,
-        trim:true
-    },
-    experience: {
-        type: String,
-        trim: true
-    }
 },
 {
     timestamps: true
