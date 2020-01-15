@@ -11,7 +11,7 @@ const CareerStatSchema = mongoose.Schema({
     summary: {
         type: String,
         maxlength: 300,
-        default: null
+        default: ""
     },
     skills: {
         type: [String],
@@ -23,7 +23,6 @@ const CareerStatSchema = mongoose.Schema({
     },
     achievements: {
         type: [Object],
-        maxlength: 3,
         default: [],
     },
     available: {
@@ -32,7 +31,7 @@ const CareerStatSchema = mongoose.Schema({
     },
     phone: {
         type: String,
-        default: null,
+        default: "",
     }
 
 },
