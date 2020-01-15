@@ -40,6 +40,7 @@ const benefitRouter = require('./routes/benefit.route');
 const applicationRouter = require('./routes/application.route');
 const categoryRouter = require('./routes/category.route');
 const locationRouter = require('./routes/location.route');
+const careerStatRouter = require('./routes/career_stat.route');
 
 app.use('/api/location', locationRouter);
 app.use('/api/category', categoryRouter);
@@ -49,6 +50,7 @@ app.use('/api/job', jobRouter);
 app.use('/api/benefit', benefitRouter);
 app.use('/api/application', applicationRouter);
 app.use('/api/auth', userRouter);
+app.use('/api/career-profile', careerStatRouter);
 
 const port = process.env.PORT || 3001;
 
