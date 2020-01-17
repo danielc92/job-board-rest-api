@@ -24,10 +24,14 @@ router.get('/', (request, response) => {
 Get job list (Seeker)
 */
 router.get('/list', (request, response) => {
-    const { title, location_string, page } = request.query;
+    const { title, location_string, category, page } = request.query;
     let query = {};
 
     // Build the query from query string parameters.
+    if (category) {
+        query = { ...query, category }
+    }
+
     if (title) {
         query = { 
             ...query, 
@@ -54,7 +58,7 @@ router.get('/list', (request, response) => {
     if (page) {
         options = { ...options, page }
     }
-
+    console.log("FETCHING JOBS LIST with", query, options)
     Job.paginate(query, options)
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))

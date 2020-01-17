@@ -6,8 +6,9 @@ const authMiddleware = require('../middleware/auth.middleware');
 /*
 Get category list
 */
-router.get('/list', authMiddleware, (request, response) => {
+router.get('/list', (request, response) => {
     Category.find()
+        .sort('name')
         .then(results => response.status(200).json(results))
         .catch(error => response.status(400).json({ error }))
 })
