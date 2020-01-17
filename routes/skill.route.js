@@ -4,14 +4,19 @@ const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 const select = require('../constants/select');
 
-router.get('/', authMiddleware, (request, response) => {
+/*
+Get skill list
+*/
+router.get('/list', authMiddleware, (request, response) => {
     Skill.find()
         .select(select.GET_SKILL)
         .then(result => response.status(200).json(result))
         .catch(error => response.status(400).json({ error }))
 })
 
-
+/*
+Create skill
+*/
 router.post('/', async (request, response) => {
     
     const { name } = request.body;

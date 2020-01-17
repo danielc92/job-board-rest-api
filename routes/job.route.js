@@ -5,6 +5,9 @@ const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
 const select = require('../constants/select');
 
+/*
+Get job detail (Seeker)
+*/
 router.get('/', (request, response) => {
     const { id } = request.query;
 
@@ -17,7 +20,9 @@ router.get('/', (request, response) => {
     .catch(error => response.status(400).json({ error }))
 })
 
-// Retrieve list of jobs with few fields to reduce network bandwidth
+/*
+Get job list (Seeker)
+*/
 router.get('/list', (request, response) => {
     const { title, location_string, page } = request.query;
     let query = {};

@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const select = require('../constants/select')
 const CareerStatModel = require('../models/career_stats.model');
 
+/*
+Create user
+*/
 router.post('/register', async (request, response) => {
     
     const { email, password, first_name, last_name, is_employer } = request.body;
@@ -42,6 +45,9 @@ router.post('/register', async (request, response) => {
     })
 })
 
+/*
+Login user
+*/
 router.post('/login', async (request, response) => {
     
     const { email, password } = request.body;
@@ -65,6 +71,9 @@ router.post('/login', async (request, response) => {
 
 })
 
+/*
+Get user detail (Employer)
+*/
 router.get('/', async (request, response) => {
     const { id } = request.query;
 
@@ -74,6 +83,5 @@ router.get('/', async (request, response) => {
     .catch(error => response.status(400).json({ error }))
 
 })
-
 
 module.exports = router;

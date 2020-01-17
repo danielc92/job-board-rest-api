@@ -5,7 +5,10 @@ const authMiddleware = require('../middleware/auth.middleware');
 const limit = 16;
 const select = require('../constants/select');
 
-router.get('/', (request, response) => {
+/*
+Get location list
+*/
+router.get('/list', (request, response) => {
     const { search } = request.query;
     const query = search ? { "$text": { "$search": search }} : {}
     Location.find(query)

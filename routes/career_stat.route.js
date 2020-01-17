@@ -2,17 +2,24 @@ const express = require('express');
 const CareerStat = require('../models/career_stats.model');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth.middleware');
+const select = require('../constants/select');
 
+/*
+Get profile detail (Seeker)
+*/
 router.get('/', authMiddleware, (request, response) => {
     
     const user_id = request.user._id;
 
     CareerStat.findOne({ user_id })
-    .select('summary skills experience achievements available phone -_id')
+    .select(select.GET_PROFILE)
     .then(result => response.status(200).json({ result }))
     .catch(error => response.status(400).json({ message: "An error occured. No profile found."}))
 })
 
+/*
+Update profile (Seeker)
+*/
 router.patch('/', authMiddleware, (request, response ) => {
     
     const user_id = request.user._id;
@@ -43,29 +50,3 @@ router.patch('/', authMiddleware, (request, response ) => {
 })
 
 module.exports = router;
-
-// summary: {
-//     type: String,
-//     maxlength: 300,
-//     default: ""
-// },
-// skills: {
-//     type: [String],
-//     default: [],
-// },
-// experience: {
-//     type: [Object],
-//     default: [],
-// },
-// achievements: {
-//     type: [Object],
-//     default: [],
-// },
-// available: {
-//     type: Boolean,
-//     default: false,
-// },
-// phone: {
-//     type: Number,
-//     default: null,
-// }
