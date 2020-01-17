@@ -4,11 +4,11 @@ const settings = require('../settings');
 module.exports = function(request, response, next) {
 
     // Grab the token from header
-    const token = request.headers['x-access-token'] || request.headers['authorization'];
+    const token = request.headers['x-access-token'];
 
     // Check if token exists
     if (!token) {
-        return response.status(401).json({ error: "Access denied, no token was provided in headers (x-access-token or authorization)."})
+        return response.status(401).json({ error: "Access to this resource is denied, you need a token."})
     }
 
     // Attempt to verify token and set request.user 

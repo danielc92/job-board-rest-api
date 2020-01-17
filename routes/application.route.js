@@ -7,19 +7,30 @@ const select = require('../constants/select');
 const authMiddleware = require('../middleware/auth.middleware');
 
 
-router.patch('/', async (request, response) => {
+router.patch('/', authMiddleware, async (request, response) => {
+
+    const { _id, is_employer } = request.user
     const { applicant_id, job_id, status } = request.query;
     if (!applicant_id || !job_id || !status) return response.status(400).json({ error: 'A value has been omitted.'})
-    
+
+    // if employer check if job belongs to employer
+    if (is_employer) {
+        const jobExists = await Job.findOne({ _id: job_id})
+        if (!jobExists) return response.status(400).json({ error: "Job for this application does not exist."})
+        if (String(jobExists.creator_id) !== _id) return response.status(400).json({ error: "Permission denied. Application does not belong to you."})
+        console.log('CHEdCK',(jobExists), (String(jobExists.creator_id) !== _id))
+    }
+
+    // Continue with update
+    console.log('update')
     const update = { status }
     const query = { applicant_id, job_id }
-
     JobApplication.findOneAndUpdate(query, update)
     .then(result => response.status(200).json({ message: "Successfully updated."}))
     .catch(error => response.status(400).json({ error }))
 })
 
-router.post('/', async (request, response) => {
+router.post('/', authMiddleware, async (request, response) => {
 
     // First store the request body
     const { applicant_id, job_id, user_message } = request.body;
@@ -47,7 +58,7 @@ router.post('/', async (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
-router.get('/', (request, response) => {
+router.get('/', authMiddleware, (request, response) => {
     JobApplication.find()
         .populate("applicant_id job_id")
         .then(results => response.status(200).json({ results }))
