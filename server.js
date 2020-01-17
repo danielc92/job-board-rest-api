@@ -32,7 +32,6 @@ db.once('open', function() {
 app.use(express.json());
 
 // Routes
-const testRouter = require('./routes/test.route');
 const jobRouter = require('./routes/job.route');
 const skillRouter = require('./routes/skill.route');
 const userRouter = require('./routes/user.route');
@@ -45,7 +44,6 @@ const careerStatRouter = require('./routes/career_stat.route');
 app.use('/api/location', locationRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/skill', skillRouter);
-app.use('/api/test', testRouter);
 app.use('/api/job', jobRouter);
 app.use('/api/benefit', benefitRouter);
 app.use('/api/application', applicationRouter);
