@@ -35,7 +35,8 @@ router.patch('/', authMiddleware, (request, response ) => {
     if (phone) { patch = {...patch, phone }}
 
     const query = { user_id }
-    CareerStat.findOneAndUpdate(query, patch)
+    const options = { runValidators: true }
+    CareerStat.findOneAndUpdate(query, patch, options)
     .then(result => response.status(200).json({ message: "Successfully updated career stats.", result}))
     .catch(error => response.status(400).json({ message: "Failed to update career stats."}))
     

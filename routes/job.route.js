@@ -106,7 +106,8 @@ router.patch('/', authMiddleware, (request, response) => {
 
     query = { _id: job_id, creator_id }
     update = { open: false }
-    Job.findOneAndUpdate(query, update)
+    const options = { runValidators: true }
+    Job.findOneAndUpdate(query, update, options)
     .then(result => response.status(200).json({ message: 'Successfully updated job status to closed.' }))
     .catch(error => response.status(400).json({ error }))
 })
