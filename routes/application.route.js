@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const select = require('../constants/select');
 const authMiddleware = require('../middleware/auth.middleware');
-const mongoose = require('mongoose')
+
 
 router.patch('/', async (request, response) => {
     const { applicant_id, job_id, status } = request.query;
@@ -51,20 +51,19 @@ router.get('/', (request, response) => {
     JobApplication.find()
         .populate("applicant_id job_id")
         .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error }))
+        .catch(error => response.status(400).json({ error: "Sorry we couldnt find this application." }))
 })
 
-router.get('/list', (request, response) => {
-
-    const { applicant_id } = request.query;
-    JobApplication.find({ applicant_id})
+router.get('/list', authMiddleware, (request, response) => {
+    const user_id = request.user._id;
+    JobApplication.find({ applicant_id: user_id})
         .populate({
             path: 'job_id',
             select: select.GET_APPLICATION_LIST
         })
         .sort('-createdAt')
         .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error }))
+        .catch(error => response.status(400).json({ error: "Failed to load applications." }))
 })
 
 router.get('/list/employer', authMiddleware, async (request, response) => {
