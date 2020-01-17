@@ -6,7 +6,9 @@ const router = express.Router();
 const select = require('../constants/select');
 const authMiddleware = require('../middleware/auth.middleware');
 
-
+/*
+Update status of job applications (Employers and Seekers)
+*/
 router.patch('/', authMiddleware, async (request, response) => {
 
     const { _id, is_employer } = request.user
@@ -18,11 +20,9 @@ router.patch('/', authMiddleware, async (request, response) => {
         const jobExists = await Job.findOne({ _id: job_id})
         if (!jobExists) return response.status(400).json({ error: "Job for this application does not exist."})
         if (String(jobExists.creator_id) !== _id) return response.status(400).json({ error: "Permission denied. Application does not belong to you."})
-        console.log('CHEdCK',(jobExists), (String(jobExists.creator_id) !== _id))
     }
 
     // Continue with update
-    console.log('update')
     const update = { status }
     const query = { applicant_id, job_id }
     const options = { runValidators: true }
@@ -31,19 +31,19 @@ router.patch('/', authMiddleware, async (request, response) => {
     .catch(error => response.status(400).json({ error }))
 })
 
+/*
+Create applications (Seekers)
+*/
 router.post('/', authMiddleware, async (request, response) => {
 
-    // First store the request body
-    const { applicant_id, job_id, user_message } = request.body;
+    const user_id = request.user._id;
+    const { job_id, user_message } = request.body;
 
     try {
-        let userExists = await User.findOne({ _id: applicant_id })
-        if (!userExists) return response.status(400).json({ error: "User does not exist"})
-    
         let jobExists = await Job.findOne({ _id: job_id })
         if (!jobExists) return response.status(400).json({ error: "Job does not exist"})
         if (!jobExists.open) return response.status(400).json({ error: "Job has been closed, you cannot apply to this job."})
-        let applicationExists = await JobApplication.findOne({ applicant_id, job_id})
+        let applicationExists = await JobApplication.findOne({ applicant_id: user_id, job_id})
         if (applicationExists) return response.status(400).json({ error: "You've already applied for this job."})
     }
     catch {
@@ -51,7 +51,9 @@ router.post('/', authMiddleware, async (request, response) => {
     }
 
     const application = new JobApplication({
-        applicant_id, job_id, user_message
+        applicant_id: user_id, 
+        job_id, 
+        user_message
     })
     
     application.save()
@@ -59,13 +61,9 @@ router.post('/', authMiddleware, async (request, response) => {
         .catch(error => response.status(400).json({ error }))
 })
 
-router.get('/', authMiddleware, (request, response) => {
-    JobApplication.find()
-        .populate("applicant_id job_id")
-        .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error: "Sorry we couldnt find this application." }))
-})
-
+/*
+Get applications list (Seeker)
+*/
 router.get('/list', authMiddleware, (request, response) => {
     const user_id = request.user._id;
     JobApplication.find({ applicant_id: user_id})
@@ -78,6 +76,9 @@ router.get('/list', authMiddleware, (request, response) => {
         .catch(error => response.status(400).json({ error: "Failed to load applications." }))
 })
 
+/*
+Get applications list (Employers)
+*/
 router.get('/list/employer', authMiddleware, async (request, response) => {
     
     // Check if the job belongs to the employer
