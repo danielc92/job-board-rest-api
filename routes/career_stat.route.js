@@ -9,9 +9,9 @@ Get profile detail (Seeker)
 */
 router.get('/', authMiddleware, (request, response) => {
     
-    const user_id = request.user._id;
+    const {_id} = request.user;
 
-    CareerStat.findOne({ user_id })
+    CareerStat.findOne({ user_id: _id })
     .select(select.GET_PROFILE)
     .then(result => response.status(200).json({ result }))
     .catch(error => response.status(400).json({ message: "An error occured. No profile found."}))
@@ -22,7 +22,7 @@ Update profile (Seeker)
 */
 router.patch('/', authMiddleware, (request, response ) => {
     
-    const user_id = request.user._id;
+    const { _id } = request.user;
 
     const {
         summary,
@@ -41,7 +41,7 @@ router.patch('/', authMiddleware, (request, response ) => {
     if (available) { patch = {...patch, available }}
     if (phone) { patch = {...patch, phone }}
 
-    const query = { user_id }
+    const query = { user_id: _id }
     const options = { runValidators: true }
     CareerStat.findOneAndUpdate(query, patch, options)
     .then(result => response.status(200).json({ message: "Successfully updated career stats.", result}))
