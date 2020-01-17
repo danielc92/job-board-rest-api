@@ -8,18 +8,14 @@ const CareerStatModel = require('../models/career_stats.model');
 
 router.post('/register', async (request, response) => {
     
-    // First check if the email is taken
-    let user = await User.findOne({ email: request.body.email })
-
-    if (user) return response.status(400).json({ error: "Email is already taken."})
-
-    // Decontruct variables from the post body.
     const { email, password, first_name, last_name, is_employer } = request.body;
     
+    // First check if the email is taken
+    let user = await User.findOne({ email })
+    if (user) return response.status(400).json({ error: "Email is already taken."})
+ 
     // Create a new User object
-    user = new User({
-        email, password, first_name, last_name, is_employer
-    })
+    user = new User({ email, password, first_name, last_name, is_employer })
 
     // Validate for errors
     let errors = await user.validate()

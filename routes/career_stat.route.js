@@ -34,7 +34,6 @@ router.patch('/', authMiddleware, (request, response ) => {
     if (available) { patch = {...patch, available }}
     if (phone) { patch = {...patch, phone }}
 
-    console.log('THIS IS PATCH', patch)
     const query = { user_id }
     CareerStat.findOneAndUpdate(query, patch)
     .then(result => response.status(200).json({ message: "Successfully updated career stats.", result}))

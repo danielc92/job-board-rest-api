@@ -15,7 +15,8 @@ const JobApplicationSchema = mongoose.Schema({
         type: String,
         default: "pending",
         trim: true,
-        lowercase: true
+        lowercase: true,
+        enum: ['pending','rejected', 'interested', 'withdrawn']
     },
     user_message: {
         type: String,

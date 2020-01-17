@@ -25,7 +25,8 @@ router.patch('/', authMiddleware, async (request, response) => {
     console.log('update')
     const update = { status }
     const query = { applicant_id, job_id }
-    JobApplication.findOneAndUpdate(query, update)
+    const options = { runValidators: true }
+    JobApplication.findOneAndUpdate(query, update, options)
     .then(result => response.status(200).json({ message: "Successfully updated."}))
     .catch(error => response.status(400).json({ error }))
 })
