@@ -157,12 +157,12 @@ const locationList = require('../data/locations.json');
 
 User.create(user)
 .then(result => {
-    let jobData = new Array(80).fill(null).map(item => {
+    let jobData = new Array(1000).fill(null).map(item => {
         
         const randomLocation = choiceItem(locationList)
         const jobItem = {
             creator_id: result._id,
-            category: "general",
+            category: choiceItem(categoriesList),
             title: titlesList[Math.floor(Math.random() * titlesList.length)],
             skills: choice(skillsList),
             benefits: choice(benefitsList),

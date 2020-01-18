@@ -24,6 +24,7 @@ router.get('/', (request, response) => {
 Get job list (Seeker)
 */
 router.get('/list', (request, response) => {
+    console.log(request.query, 'REQ QUERY')
     const { title, location_string, category, page } = request.query;
     let query = {};
 
