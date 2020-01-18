@@ -25,8 +25,6 @@ const categoriesList = require('../data/categories.json');
 const benefitsList = require('../data/benefits.json');
 const titlesList = require('../data/titles.json');
 
-
-
 // Benefits
 benefitsData = benefitsList.map(name => ({ name }))
 
@@ -162,7 +160,6 @@ User.create(user)
     let jobData = new Array(80).fill(null).map(item => {
         
         const randomLocation = choiceItem(locationList)
-        console.log(randomLocation)
         const jobItem = {
             creator_id: result._id,
             category: "general",
@@ -190,18 +187,41 @@ User.create(user)
 .catch(error => console.log(error))
 
 
+// Create two job seekers
+
 const password2 = '123456789'
 const hashedPassword2 = bcrypt.hashSync(password2, settings.bcrypt_iterations);
-let user2 = {
+
+let seeker1 = new User({
     email: "test2@test.com",
     password: hashedPassword2,
     first_name: "Jane",
     last_name: "Doe",
-    is_employer: false,
-}
+})
 
-User.create(user2)
-.then(result => console.log(user2, ' was created'))
+let seeker2 = new User({
+    email: "test3@test.com",
+    password: hashedPassword2,
+    first_name: "Bruce",
+    last_name: "Spade",
+})
+
+const CareerStats = require('../models/career_stats.model');
+
+seeker1.save()
+.then(result => {
+    console.log(`Successfully created ${seeker1.email}`, seeker1)
+    CareerStats.create({ user_id: seeker1._id })
+    .then(result => console.log(`Successfully created profile for ${seeker1.email}`))
+    .catch(e=>console.log('Failed to create profile'))
+})
 .catch(e => console.log(e))
 
-
+seeker2.save()
+.then(result => {
+    console.log(`Successfully created ${seeker2.email}`)
+    CareerStats.create({ user_id: seeker2._id })
+    .then(result => console.log(`Successfully created profile for ${seeker2.email}`))
+    .catch(e=>console.log('Failed to create profile'))
+})
+.catch(e => console.log(e))
