@@ -162,7 +162,7 @@ User.create(user)
         const randomLocation = choiceItem(locationList)
         const jobItem = {
             creator_id: result._id,
-            category: choiceItem(categoriesList),
+            category: choiceItem(categoriesList).trim().toLowerCase(),
             title: titlesList[Math.floor(Math.random() * titlesList.length)],
             skills: choice(skillsList),
             benefits: choice(benefitsList),

@@ -28,6 +28,7 @@ router.patch('/', authMiddleware, (request, response ) => {
         summary,
         skills,
         experience,
+        education,
         achievements,
         available,
         phone
@@ -37,6 +38,7 @@ router.patch('/', authMiddleware, (request, response ) => {
     if (summary) { patch = {...patch, summary }}
     if (skills) { patch = {...patch, skills }}
     if (experience) { patch = {...patch, experience }}
+    if (education) { patch = {...patch, education }}
     if (achievements) { patch = {...patch, achievements }}
     if (available) { patch = {...patch, available }}
     if (phone) { patch = {...patch, phone }}
@@ -44,7 +46,10 @@ router.patch('/', authMiddleware, (request, response ) => {
     const query = { user_id: _id }
     const options = { runValidators: true }
     CareerStat.findOneAndUpdate(query, patch, options)
-    .then(result => response.status(200).json({ message: "Successfully updated career stats.", result}))
+    .then(result => {
+        console.log(result)
+        return response.status(200).json({ message: "Successfully updated career stats.", result})
+    })
     .catch(error => response.status(400).json({ message: "Failed to update career stats."}))
     
 })

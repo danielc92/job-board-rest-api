@@ -6,5 +6,5 @@ module.exports = {
     GET_LOCATION: 'location location_string state postcode locality -_id',
     GET_SKILL: 'name',
     GET_USER: '-password -admin',
-    GET_PROFILE: 'summary skills experience achievements available phone -_id',
+    GET_PROFILE: 'summary skills experience education achievements available phone -_id',
 }
