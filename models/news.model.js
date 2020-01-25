@@ -6,13 +6,17 @@ const NewsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    paragraphs: {
+    content: {
         type: [String],
         required: true
     },
-    brief: {
+    summary: {
         type: String,
         required: true
+    },
+    category: {
+        type: String,
+        enum: ['update', 'news article']
     }
 },
 {
