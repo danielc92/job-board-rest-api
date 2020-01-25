@@ -67,12 +67,12 @@ router.get('/list', (request, response) => {
 
 // Retrieve list of jobs with few fields to reduce network bandwidth
 router.get('/list/employer', authMiddleware, (request, response) => {
-    const { page, creator_id } = request.query;
+    const { page } = request.query;
+    const { _id } = request.user;
     // const { _id } = request.user;
 
-    if (!creator_id) return response.status(400).json({ error: 'creator_id field must be supplied.'})
     let query = {
-        creator_id
+        creator_id: _id
     };
 
     // Build options
@@ -105,18 +105,17 @@ router.post('/', authMiddleware, (request, response) => {
 // Update job status
 router.patch('/', authMiddleware, (request, response) => {
     // Store query
-    const { creator_id, job_id } = request.query;
+    const { job_id } = request.query;
     
     // Check if params exist
     if (!job_id) return response.status(400).json({ error: "Missing job_id field."})
-    if (!creator_id) return response.status(400).json({ error: "Missing creator_id field."})
     
-    // Check if out of scope
-    const scopeMatch = (request.user._id === creator_id);
-    if (!scopeMatch) return response.status(400).json({ error: "This job does not belong to you."})
+    const { _id } = request.user;
 
-    query = { _id: job_id, creator_id }
+    query = { _id: job_id, creator_id: _id }
+
     update = { open: false }
+
     const options = { runValidators: true }
     Job.findOneAndUpdate(query, update, options)
     .then(result => response.status(200).json({ message: 'Successfully updated job status to closed.' }))
