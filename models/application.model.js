@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const JobApplicationSchema = mongoose.Schema({
@@ -14,7 +14,7 @@ const JobApplicationSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "pending",
+        default: 'pending',
         trim: true,
         lowercase: true,
         enum: ['pending','rejected', 'interested', 'withdrawn']
