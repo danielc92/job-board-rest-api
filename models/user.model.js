@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const settings = require('../settings');
-const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
+const settings = require('../settings')
+const jwt = require('jsonwebtoken')
 
 const UserSchema = mongoose.Schema({
     email: {
@@ -55,10 +55,10 @@ UserSchema.methods.makeToken = function() {
     )
 
     const token = {
-        "x-auth-token": tokenHash,
+        'x-auth-token': tokenHash,
     }
 
-    return token;
+    return token
 }
 
 module.exports = mongoose.model('User', UserSchema)

@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const Category = require('../models/category.model');
-const authMiddleware = require('../middleware/auth.middleware');
+const express = require('express')
+const router = express.Router()
+const Category = require('../models/category.model')
+const authMiddleware = require('../middleware/auth.middleware')
 
 /*
 Get category list
@@ -18,11 +18,11 @@ Create category
 */
 router.post('/', async (request, response) => {
     
-    const { name } = request.body;
+    const { name } = request.body
 
     // Check if Category exists and return response if so.
     let exists = await Category.findOne({ name })
-    if (exists) return response.status(400).json({ error: "Category already exists."})
+    if (exists) return response.status(400).json({ error: 'Category already exists.'})
     
     // Create new Category object and attempt to save
     let category = new Category({ name })
@@ -32,9 +32,9 @@ router.post('/', async (request, response) => {
         .catch(error=>error)
     
     // Check for validation error, else naively return status 200
-    if (result.name === 'ValidationError') return response.status(400).json({error: "Validation error", result})
+    if (result.name === 'ValidationError') return response.status(400).json({error: 'Validation error', result})
 
     return response.status(200).json({ message: `'${name}' Category has been successfully created.`})
     
 })
-module.exports = router;
+module.exports = router

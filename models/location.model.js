@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const LocationSchema = mongoose.Schema({
     location: {
@@ -24,6 +24,6 @@ const LocationSchema = mongoose.Schema({
 //Text index for full text search.
 LocationSchema.index({location_string: 'text'})
 
-const Location = mongoose.model('Location', LocationSchema);
+const Location = mongoose.model('Location', LocationSchema)
 
 module.exports = Location

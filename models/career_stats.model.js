@@ -11,7 +11,7 @@ const CareerStatSchema = mongoose.Schema({
     summary: {
         type: String,
         maxlength: 300,
-        default: ""
+        default: ''
     },
     skills: {
         type: [String],
@@ -35,7 +35,7 @@ const CareerStatSchema = mongoose.Schema({
     },
     phone: {
         type: String,
-        default: "",
+        default: '',
     }
 
 },

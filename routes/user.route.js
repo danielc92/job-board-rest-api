@@ -1,21 +1,21 @@
-const User = require('../models/user.model');
-const express = require('express');
-const settings = require('../settings');
-const router = express.Router();
-const bcrypt = require('bcrypt');
+const User = require('../models/user.model')
+const express = require('express')
+const settings = require('../settings')
+const router = express.Router()
+const bcrypt = require('bcrypt')
 const select = require('../constants/select')
-const CareerStatModel = require('../models/career_stats.model');
+const CareerStatModel = require('../models/career_stats.model')
 
 /*
 Create user
 */
 router.post('/register', async (request, response) => {
     
-    const { email, password, first_name, last_name, is_employer } = request.body;
+    const { email, password, first_name, last_name, is_employer } = request.body
     
     // First check if the email is taken
     let user = await User.findOne({ email })
-    if (user) return response.status(400).json({ error: "Email is already taken."})
+    if (user) return response.status(400).json({ error: 'Email is already taken.'})
  
     // Create a new User object
     user = new User({ email, password, first_name, last_name, is_employer })
@@ -30,13 +30,13 @@ router.post('/register', async (request, response) => {
 
     // Hash the password and save to database
     user.password = await bcrypt.hash(user.password, settings.bcrypt_iterations)
-    await user.save();
+    await user.save()
 
     let career_stat = new CareerStatModel({
         user_id: user._id
     })
 
-    await career_stat.save();
+    await career_stat.save()
 
 
     // Send response indicating success
@@ -50,23 +50,23 @@ Login user
 */
 router.post('/login', async (request, response) => {
     
-    const { email, password } = request.body;
+    const { email, password } = request.body
 
-    if (!email || !password) return response.status(400).json({error: "Username or password is missing."})
+    if (!email || !password) return response.status(400).json({error: 'Username or password is missing.'})
 
     let user = await User.findOne({ email })
         .then(result => result)
         .catch(error => error)
     
-    if (!user) return response.status(400).json({ error: "Incorrect credentials were supplied."})
+    if (!user) return response.status(400).json({ error: 'Incorrect credentials were supplied.'})
 
     let comparison = await bcrypt.compare(password, user.password)
         .then(result => result)
         .catch(error => error)
 
-    if (!comparison) return response.status(400).json({ error: "Incorrect credentials were supplied."})
+    if (!comparison) return response.status(400).json({ error: 'Incorrect credentials were supplied.'})
 
-    const token = await user.makeToken();
+    const token = await user.makeToken()
     response.status(200).json({ token })
 
 })
@@ -75,13 +75,13 @@ router.post('/login', async (request, response) => {
 Get user detail (Employer)
 */
 router.get('/', async (request, response) => {
-    const { id } = request.query;
+    const { id } = request.query
 
     User.findOne({ _id: id })
-    .select(select.GET_USER)
-    .then(results => response.status(200).json({ results }))
-    .catch(error => response.status(400).json({ error }))
+        .select(select.GET_USER)
+        .then(results => response.status(200).json({ results }))
+        .catch(error => response.status(400).json({ error }))
 
 })
 
-module.exports = router;
+module.exports = router
