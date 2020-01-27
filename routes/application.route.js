@@ -11,20 +11,24 @@ Update status of job applications (Employers and Seekers)
 router.patch('/', authMiddleware, async (request, response) => {
     const { _id, is_employer } = request.user
     const { job_id, status, applicant_id } = request.query;
-    if ( !job_id || !status) return response.status(400).json({ error: 'A value has been omitted.'})
 
-    if (is_employer) {
-        // Job must belong to Employer
-        if (!applicant_id) return response.status(400).json({ error: 'Applicant id has been omitted.'})
-        const jobExists = await Job.findOne({ _id: job_id})
-        if (!jobExists) return response.status(400).json({ error: "Job for this application does not exist."})
-        if (String(jobExists.creator_id) !== _id) return response.status(400).json({ error: "Permission denied. Application does not belong to you."})
-    } else {
-        // Applicant must exist for Seeker
-        const applicationExist = await JobApplication.findOne({ job_id, applicant_id: _id})
-        if (!applicationExist) return response.status(400).json({ error: "Application does not exist or belong to you."})
+    try {
+        if (is_employer) {
+            // Job must belong to Employer
+            if (!applicant_id || !job_id || !status) return response.status(400).json({ error: 'A field has been omitted.'})
+            const jobExists = await Job.findOne({ _id: job_id})
+            if (!jobExists) return response.status(400).json({ error: "Job for this application does not exist."})
+            if (String(jobExists.creator_id) !== _id) return response.status(400).json({ error: "Permission denied. Application does not belong to you."})
+        } else {
+            // Applicant must exist for Seeker
+            if (!job_id || !status) return response.status(400).json({ error: 'A field has been omitted.A field has been omitted.'})
+            const applicationExist = await JobApplication.findOne({ job_id, applicant_id: _id})
+            if (!applicationExist) return response.status(400).json({ error: "Application does not exist or belong to you."})
+        }
+    } catch (e) {
+        return response.status(400).json({ error: "Server error, something went wrong."})
     }
-
+    
     // Continue with update
     const update = { status }
     const query = is_employer ? { applicant_id, job_id } : { applicant_id: _id, job_id}

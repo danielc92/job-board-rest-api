@@ -225,3 +225,24 @@ seeker2.save()
             .catch(e=>console.log('Failed to create profile'))
     })
     .catch(e => console.log(e))
+
+
+
+const News = require('../models/news.model')
+const faker = require('faker')
+
+
+for (let i =0; i < 50; i ++) {
+    const newsItem = News({
+        title: faker.lorem.text().substring(0, 20),
+        content: new Array(6).fill(null).map(i => faker.lorem.paragraph()),
+        category: 'update',
+        summary: faker.lorem.paragraph()
+    })
+
+    newsItem.save()
+        .then(result=>console.log(`Saved news item ${result._id}`))
+        .catch(error => console.log(error))
+}
+    
+    

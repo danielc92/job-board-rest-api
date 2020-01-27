@@ -16,7 +16,8 @@ const NewsSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['update', 'news article']
+        enum: ['update', 'news article'],
+        required: true
     }
 },
 {

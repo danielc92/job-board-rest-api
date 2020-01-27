@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Location = require('../models/location.model')
-const authMiddleware = require('../middleware/auth.middleware')
 const limit = 16
 const select = require('../constants/select')
 
