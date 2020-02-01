@@ -5,6 +5,19 @@ const authMiddleware = require('../middleware/auth.middleware')
 const select = require('../constants/select')
 
 /*
+Get profile detail (Employer)
+*/
+router.get('/employer', authMiddleware, (request, response) => {
+    
+    const {_id} = request.query
+
+    CareerStat.findOne({ user_id: _id })
+        .select(select.GET_PROFILE)
+        .then(result => response.status(200).json({ result }))
+        .catch(error => response.status(400).json({ message: 'An error occured. No profile found.'}))
+})
+
+/*
 Get profile detail (Seeker)
 */
 router.get('/', authMiddleware, (request, response) => {
