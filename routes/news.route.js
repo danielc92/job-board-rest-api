@@ -24,13 +24,5 @@ router.get('/', (request, response) => {
         .catch(error => response.status(400).json({ error: 'An error occured. Could not find news article.'}))
 })
 
-router.post('/', (request, response) => {
-    const newsItem = new News({ ...request.body})
-
-    newsItem.save()
-        .then(result => response.status(200).json({ message: 'Successfully created article' }))
-        .catch(error => response.status(400).json({ error: 'Could not create news.'}))
-})
-
 module.exports = router
 

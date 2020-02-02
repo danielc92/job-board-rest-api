@@ -5,6 +5,7 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const select = require('../constants/select')
 const CareerStatModel = require('../models/career_stats.model')
+const authMiddleware = require('../middleware/auth.middleware')
 
 /*
 Create user
@@ -74,7 +75,7 @@ router.post('/login', async (request, response) => {
 /*
 Get user detail (Employer)
 */
-router.get('/', async (request, response) => {
+router.get('/', authMiddleware ,async (request, response) => {
     const { id } = request.query
 
     User.findOne({ _id: id })
