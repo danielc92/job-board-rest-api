@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
     mongoose.set('debug', true)
     console.log('Mongoose debug mode has been switched on.')
 } else { console.log('Mongoose Debug mode has been switched off.')}
-
+     
 // Connect to MongoDB via mongoose.
 mongoose.connect('mongodb://localhost:27017/jobboard', { useNewUrlParser: true })
 const db = mongoose.connection
