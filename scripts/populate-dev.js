@@ -20,7 +20,7 @@ const benefitsList = require('../data/benefits.json')
 const titlesList = require('../data/titles.json')
 const locationList = require('../data/locations.json')
 
-mongoose.connect(uri, { useNewUrlParser: true })
+mongoose.connect(uri, { useNewUrlParser: true,  useUnifiedTopology: true })
 const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'Connection error:'))

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const News = require('../models/news.model')
 const limit = require('../constants/limit')
+const select = require('../constants/select')
 
 router.get('/list', (request, response) => {
     const { page } = request.query

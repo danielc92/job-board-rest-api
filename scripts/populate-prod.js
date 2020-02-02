@@ -24,7 +24,7 @@ const skillsList = require('../data/skills.json')
 const benefitsList = require('../data/benefits.json')
 const categoriesList = require('../data/categories.json')
 
-mongoose.connect(uri, { useNewUrlParser: true })
+mongoose.connect(uri, { useNewUrlParser: true,  useUnifiedTopology: true })
 const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'Connection error:'))
