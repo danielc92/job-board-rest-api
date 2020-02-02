@@ -83,7 +83,7 @@ router.get('/list', authMiddleware, (request, response) => {
         limit: limit.APPLICATION_LIST_DASHBOARD,
         populate: {
             path: 'job_id',
-            select: 'title'
+            select: select.GET_APPLICATION_LIST,
         },
     }
 
@@ -121,7 +121,7 @@ router.get('/list/employer', authMiddleware, async (request, response) => {
         limit: limit.APPLICATION_LIST_DASHBOARD,
         populate: {
             path: 'applicant_id',
-            select: 'first_name last_name email'
+            select: select.GET_APPLICATION_LIST_EMPLOYER
         },
     }
 

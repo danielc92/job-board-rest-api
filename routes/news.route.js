@@ -6,7 +6,7 @@ const limit = require('../constants/limit')
 router.get('/list', (request, response) => {
     const { page } = request.query
     let options = {
-        select: 'title summary category createdAt',
+        select: select.GET_NEWS_LIST,
         sort: { createdAt: 'desc' },
         limit: limit.NEWS_LIST,
     }
