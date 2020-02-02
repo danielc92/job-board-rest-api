@@ -43,7 +43,8 @@ Create applications (Seekers)
 */
 router.post('/', authMiddleware, async (request, response) => {
 
-    const { _id } = request.user;
+    const { _id, is_employer} = request.user;
+    if (is_employer) return response.status(400).json({ error: "You need to be logged in as a job seeker to apply."})
     const { job_id, user_message } = request.body;
 
     try {
