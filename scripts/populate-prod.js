@@ -63,14 +63,13 @@ const locations_new = all_locations.map(item => {
     
     const {POSTCODE, STATE_CODE, LOCALITY_NAME, LONGITUDE, LATITUDE} = item
     const STATE_STRING = Utils.returnFullState(STATE_CODE)
-    const LOCALITY_NAME_PROPERCASE = Utils.properCaseTransform(LOCALITY_NAME)
     
     const new_item = {
         location: {
             coordinates: [LONGITUDE, LATITUDE]
         },
         state: STATE_CODE,
-        location_string: `${LOCALITY_NAME_PROPERCASE}, ${POSTCODE}, ${STATE_STRING}`,
+        location_string: `${LOCALITY_NAME}, ${POSTCODE}, ${STATE_STRING}`,
         postcode: POSTCODE,
         locality: LOCALITY_NAME,
             
