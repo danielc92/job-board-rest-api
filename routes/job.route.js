@@ -60,7 +60,7 @@ router.get('/list', (request, response) => {
     if (page) {
         options = { ...options, page }
     }
-    console.log('FETCHING JOBS LIST with', query, options)
+
     Job.paginate(query, options)
         .then(results => response.status(200).json({ results }))
         .catch(error => response.status(400).json({ error }))
