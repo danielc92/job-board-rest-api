@@ -1,50 +1,47 @@
 const mongoose = require('mongoose')
 const uri = 'mongodb://localhost:27017/jobboard'
+const Utils = require('./utils')
+const faker = require('faker')
+const Skill = require('../models/skill.model')
+const CareerStats = require('../models/career_stats.model')
+const News = require('../models/news.model')
+const User = require('../models/user.model')
+const Benefit = require('../models/benefit.model')
+const Category = require('../models/category.model')
+const Job = require('../models/job.model')
+const skillsList = require('../data/skills.json')
+const categoriesList = require('../data/categories.json')
+const benefitsList = require('../data/benefits.json')
+const titlesList = require('../data/titles.json')
 
 // Connect to the database
 mongoose.connect(uri, { useNewUrlParser: true })
 const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'Connection error:'))
-
 db.once('open', function() {
     console.log(`Successfully connected to MongoDB on ${uri}.`)
 })
 
 
-// Import models
-const Skill = require('../models/skill.model')
-const User = require('../models/user.model')
-const Benefit = require('../models/benefit.model')
-const Category = require('../models/category.model')
-
-
-// Import Dummy data
-const skillsList = require('../data/skills.json')
-const categoriesList = require('../data/categories.json')
-const benefitsList = require('../data/benefits.json')
-const titlesList = require('../data/titles.json')
-
-// Benefits
-benefitsData = benefitsList.map(name => ({ name }))
-
+const benefitsData = benefitsList.map(name => ({ name }))
 Benefit.insertMany(benefitsData)
-    .then(r => console.log('Successfully insert benefits.'))
-    .catch(e => console.log(e))
+    .then(result => console.log('[SUCCESS] Inserted benefits'))
+    .catch(error => console.log('[ERROR] Failed to insert benefits', error))
 
 // Skills
-skillsData = skillsList.map(name => ({ name }))
+const skillsData = skillsList.map(name => ({ name }))
 
 Skill.insertMany(skillsData)
-    .then(r => console.log('Successfully insert skills.'))
-    .catch(e => console.log(e))
+    .then(result => console.log('[SUCCESS] Inserted skills'))
+    .catch(error => console.log('[ERROR] Failed to insert skills', error))
 
 // Categories
-categoriesData = categoriesList.map(name => ({ name }))
+const categoriesData = categoriesList.map(name => ({ name }))
 
 Category.insertMany(categoriesData)
-    .then(r => console.log('Successfully insert categories.'))
-    .catch(e => console.log(e))
+    .then(result => console.log('[SUCCESS] Inserted categories'))
+    .catch(error => console.log('[ERROR] Failed to insert categories', error))
 
 
 // Insert Location data
@@ -57,99 +54,43 @@ const south_australia = require('../locality/SA.json')
 const tasmania = require('../locality/TAS.json') 
 const victoria = require('../locality/VIC.json')
 const western_australia = require('../locality/WA.json')
+const all_locations = [...new_south_wales, 
+    ...northern_territory,
+    ...queensland,
+    ...south_australia,
+    ...tasmania,
+    ...victoria,
+    ...western_australia]
 
+const locations_new = all_locations.map(item => {
+    
+    const {POSTCODE, STATE_CODE, LOCALITY_NAME, LONGITUDE, LATITUDE} = item
+    const STATE_STRING = Utils.returnFullState(STATE_CODE)
+    const LOCALITY_NAME_PROPERCASE = Utils.properCaseTransform(LOCALITY_NAME)
 
-function returnFullState(CODE) {
-    let fullState
-    switch (CODE) {
-    case 'NSW':
-        fullState = 'New South Wales (NSW)'
-        break
-    case 'NT':
-        fullState = 'Northern Territory (NT)'
-        break
-    case 'QLD':
-        fullState = 'Queensland (QLD)'
-        break
-    case 'SA':
-        fullState = 'South Australia (SA)'
-        break
-    case 'TAS':
-        fullState = 'Tasmania (TAS)'
-        break
-    case 'VIC':
-        fullState = 'Victoria (VIC)'
-        break
-    case 'WA':
-        fullState = 'Western Australia (WA)'
-        break
-    default:
-        fullState = null
-    }
-
-    return fullState
-}
-
-function bulkInsertState(locations) {
-    const locations_new = locations.map(item => {
+    const new_item = {
+        location: {
+            coordinates: [LONGITUDE, LATITUDE]
+        },
+        state: STATE_CODE,
+        location_string: `${LOCALITY_NAME_PROPERCASE}, ${POSTCODE}, ${STATE_STRING}`,
+        postcode: POSTCODE,
+        locality: LOCALITY_NAME,
         
-        const {POSTCODE, STATE_CODE, LOCALITY_NAME, LONGITUDE, LATITUDE} = item
-        const STATE_STRING = returnFullState(STATE_CODE)
+    }
+    return new_item
+})
 
-        const new_item = {
-            location: {
-                coordinates: [LONGITUDE, LATITUDE]
-            },
-            state: STATE_CODE,
-            location_string: `${LOCALITY_NAME}, ${POSTCODE}, ${STATE_STRING}`,
-            postcode: POSTCODE,
-            locality: LOCALITY_NAME,
-            
-        }
-        return new_item
-    })
-
-    Location.insertMany(locations_new)
-        .then(result => console.log('Successully inserted bulk locations'))
-        .catch(error => console.log(error))
-}
+Location.insertMany(locations_new)
+    .then(result => console.log('[SUCCESS] Inserted locations'))
+    .catch(error => console.log('[ERROR] Failed to insert locations', error))
 
 
-bulkInsertState(new_south_wales)
-bulkInsertState(northern_territory)
-bulkInsertState(queensland)
-bulkInsertState(south_australia)
-bulkInsertState(tasmania)
-bulkInsertState(victoria)
-bulkInsertState(western_australia)
-
-
-//  Bulk insert Jobs
-
-const Job = require('../models/job.model')
-
-function choice(array) {
-    let length = array.length > 7 ? 7 : array.length
-    let itemsToTake = Math.floor(Math.random() * length) + 1
-    return array.slice(0, itemsToTake)
-}
-
-function choiceItem(array) {
-    let length = array.length
-    let index = Math.floor(Math.random() * length)
-    return array[index]
-}
-
-// Create a test user
-const bcrypt = require('bcrypt')
-const settings = require('../settings')
-const password = '123456789'
-const hashedPassword = bcrypt.hashSync(password, settings.bcrypt_iterations)
 let user = {
     email: 'test@test.com',
-    password: hashedPassword,
-    first_name: 'john',
-    last_name: 'doe',
+    password: Utils.getPassword(),
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
     is_employer: true,
 }
 
@@ -157,21 +98,21 @@ const locationList = require('../data/locations.json')
 
 User.create(user)
     .then(result => {
-        let jobData = new Array(1000).fill(null).map(item => {
+        let jobData = new Array(12567).fill(null).map(item => {
         
-            const randomLocation = choiceItem(locationList)
+            const randomLocation = Utils.randomItemFromArray(locationList)
             const jobItem = {
                 creator_id: result._id,
-                category: choiceItem(categoriesList).trim().toLowerCase(),
-                title: titlesList[Math.floor(Math.random() * titlesList.length)],
-                skills: choice(skillsList),
-                benefits: choice(benefitsList),
-                company_summary: 'This is a great company based in X, we specialize in Y and we are currently hiring for a new employee in a particular department.',
-                job_summary: 'This is a summary about the job, find below more details.',
-                contact_summary: '04 0000 0000 or contact me on test@test.com via outlook.',
+                category: Utils.randomItemFromArray(categoriesList).trim().toLowerCase(),
+                title: Utils.randomItemFromArray(titlesList),
+                skills: Utils.randomItemsFromArray(skillsList),
+                benefits: Utils.randomItemsFromArray(benefitsList),
+                company_summary: faker.lorem.paragraph(),
+                job_summary: faker.lorem.paragraph(),
+                contact_summary: faker.lorem.paragraph(),
                 requirements: [],
-                salary_range_low: Math.floor(Math.random() * 20000),
-                salary_range_high: Math.floor(Math.random() * 200000),
+                salary_range_low: Utils.randomLowSalary(),
+                salary_range_high: Utils.randomHighSalary(),
                 location_string: randomLocation.location_string,
                 location: randomLocation.location,
     
@@ -181,68 +122,44 @@ User.create(user)
 
         Job
             .insertMany(jobData)
-            .then(result => console.log('Insert many jobs'))
-            .catch(error => console.log('Failed to insert jobs'))
+            .then(result => console.log('[SUCCESS] Inserted jobs'))
+            .catch(error => console.log('[ERROR] Failed to insert jobs', error))
     })
     .catch(error => console.log(error))
 
 
-// Create two job seekers
+// Create some job seekers
 
-const password2 = '123456789'
-const hashedPassword2 = bcrypt.hashSync(password2, settings.bcrypt_iterations)
+const jobSeekers = new Array(25).fill(true).map((item, index) => (
+    {
+        email: `test${index}@test.com`,
+        password: Utils.getPassword(),
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+    }
+))
 
-let seeker1 = new User({
-    email: 'test2@test.com',
-    password: hashedPassword2,
-    first_name: 'Jane',
-    last_name: 'Doe',
-})
-
-let seeker2 = new User({
-    email: 'test3@test.com',
-    password: hashedPassword2,
-    first_name: 'Bruce',
-    last_name: 'Spade',
-})
-
-const CareerStats = require('../models/career_stats.model')
-
-seeker1.save()
-    .then(result => {
-        console.log(`Successfully created ${seeker1.email}`, seeker1)
-        CareerStats.create({ user_id: seeker1._id })
-            .then(result => console.log(`Successfully created profile for ${seeker1.email}`))
-            .catch(e=>console.log('Failed to create profile'))
+User.insertMany(jobSeekers)
+    .then(results => {
+        console.log('[SUCCESS] Inserted job seekers')
+        const careerStats = results.map(r => ({ user_id: r._id}))
+        CareerStats.insertMany(careerStats)
+            .then(results => console.log('[SUCCESS] Inserted profiles'))
+            .catch(error => console.log('[ERROR] Failed to insert profiles'))
     })
-    .catch(e => console.log(e))
-
-seeker2.save()
-    .then(result => {
-        console.log(`Successfully created ${seeker2.email}`)
-        CareerStats.create({ user_id: seeker2._id })
-            .then(result => console.log(`Successfully created profile for ${seeker2.email}`))
-            .catch(e=>console.log('Failed to create profile'))
-    })
-    .catch(e => console.log(e))
+    .catch(error => console.log('[ERROR] Failed to insert job seekers', error))
 
 
 
-const News = require('../models/news.model')
-const faker = require('faker')
+const newsItems = new Array(200).fill(true).map(item => ({
+    title: faker.lorem.text().substring(0, 20),
+    content: new Array(6).fill(null).map(i => faker.lorem.paragraph()),
+    category: 'update',
+    summary: faker.lorem.paragraph()
+}))
 
+News.insertMany(newsItems)
+    .then(result => console.log('[SUCCESS] Inserted news'))
+    .catch(error => console.log('[ERROR] Failed to insert news', error))
 
-for (let i =0; i < 50; i ++) {
-    const newsItem = News({
-        title: faker.lorem.text().substring(0, 20),
-        content: new Array(6).fill(null).map(i => faker.lorem.paragraph()),
-        category: 'update',
-        summary: faker.lorem.paragraph()
-    })
-
-    newsItem.save()
-        .then(result=>console.log(`Saved news item ${result._id}`))
-        .catch(error => console.log(error))
-}
-    
     
