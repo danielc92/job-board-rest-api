@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const select = require('../constants/select');
 const authMiddleware = require('../middleware/auth.middleware');
+const limit = require('../constants/limit')
 
 /*
 Update status of job applications (Employers and Seekers)
@@ -79,7 +80,7 @@ router.get('/list', authMiddleware, (request, response) => {
     let options = {
         sort: { createdAt: 'desc' },
         select: select.GET_APPLICATION_LIST,
-        limit: 10,
+        limit: limit.APPLICATION_LIST_DASHBOARD,
         populate: {
             path: 'job_id',
             select: 'title'
@@ -117,7 +118,7 @@ router.get('/list/employer', authMiddleware, async (request, response) => {
     let options = {
         sort: { createdAt: 'desc' },
         select: select.GET_APPLICATION_LIST,
-        limit: 10,
+        limit: limit.APPLICATION_LIST_DASHBOARD,
         populate: {
             path: 'applicant_id',
             select: 'first_name last_name email'

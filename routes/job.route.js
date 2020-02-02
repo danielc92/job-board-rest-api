@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 const authMiddleware = require('../middleware/auth.middleware')
 const select = require('../constants/select')
+const limit = require('../constants/limit')
 
 /*
 Get job detail (Seeker)
@@ -52,7 +53,7 @@ router.get('/list', (request, response) => {
     let options = {
         select: select.GET_JOB_LIST_SEEKER,
         sort: { createdAt: 'desc' },
-        limit: 5,
+        limit: limit.JOB_LIST_MAIN,
     }
 
     // Append page number
@@ -79,7 +80,7 @@ router.get('/list/employer', authMiddleware, (request, response) => {
     let options = {
         select: select.GET_JOB_LIST_EMPLOYER,
         sort: { createdAt: 'desc' },
-        limit: 10,
+        limit: limit.JOB_LIST_DASHBOARD,
     }
 
     // Append page number

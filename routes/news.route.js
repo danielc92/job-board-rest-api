@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const News = require('../models/news.model')
+const limit = require('../constants/limit')
 
 router.get('/list', (request, response) => {
     const { page } = request.query
     let options = {
         select: 'title summary category createdAt',
         sort: { createdAt: 'desc' },
-        limit: 5,
+        limit: limit.NEWS_LIST,
     }
 
     if (page) options.page = page 
