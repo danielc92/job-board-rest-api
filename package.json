@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev-redis-start": "docker run --name redis-instance -d -p 6379:6379 redis",
-    "dev-mongo-start": "docker run --name mongo-instance -d -p 27017:27017 mongo",
-    "dev-mongo-populate": "node ./scripts/prepopulate-database.js",
+    "redis-start": "docker run --name redis-instance -d -p 6379:6379 redis",
+    "mongo-start": "docker run --name mongo-instance -d -p 27017:27017 mongo",
+    "mongo-gen-all": "concurrently --kill-others \"npm run mongo-gen-prod\" \"npm run mongo-gen-dev\"",
+    "mongo-gen-prod": "node ./scripts/populate-prod.js",
+    "mongo-gen-dev": "node ./scripts/populate-dev.js",
     "server": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniel Corcoran",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -23,5 +25,8 @@
     "mongoose": ">=5.7.5",
     "mongoose-paginate-v2": "^1.3.6",
     "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }
