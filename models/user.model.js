@@ -35,6 +35,10 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    activated: {
+        type: Boolean,
+        default: false,
+    }
 },
 {
     timestamps: true
@@ -58,6 +62,19 @@ UserSchema.methods.makeToken = function() {
         'x-auth-token': tokenHash,
     }
 
+    return token
+}
+
+UserSchema.methods.makeResetToken = function() {
+    const token = jwt.sign(
+        {
+            _id: this._id
+        },
+        settings.token_secret,
+        {
+            expiresIn: settings.reset_token_expiry_seconds
+        }
+    )
     return token
 }
 

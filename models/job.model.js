@@ -80,5 +80,6 @@ const JobSchema = mongoose.Schema(
 
 JobSchema.plugin(mongoosePaginate)
 JobSchema.index({title: 'text'})
+JobSchema.index({'location': '2dsphere'})
 
 module.exports = mongoose.model('Job', JobSchema)

@@ -1,5 +1,6 @@
 module.exports = {
     token_secret: 'topsecretkey',
-    token_expiry_seconds: 30 * 60, // 30 times 60 seconds = 30 minutes
+    reset_token_expiry_seconds: 60 * 60, // 60 MINS
+    token_expiry_seconds: 30 * 60, // 30 MINS
     bcrypt_iterations: 10
 }

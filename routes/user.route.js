@@ -39,6 +39,8 @@ router.post('/register', async (request, response) => {
 
     await career_stat.save()
 
+    const token = user.makeResetToken()
+    console.log(token)
 
     // Send response indicating success
     response.status(200).json({
@@ -61,6 +63,7 @@ router.post('/login', async (request, response) => {
     
     if (!user) return response.status(400).json({ error: 'Incorrect credentials were supplied.'})
 
+    if (!user.activated) return response.status(400).json({error: 'Your account is not activated, please check your email for an activation link.'})
     let comparison = await bcrypt.compare(password, user.password)
         .then(result => result)
         .catch(error => error)
