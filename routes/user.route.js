@@ -75,6 +75,69 @@ router.post('/register', async (request, response) => {
     
 })
 
+// Sends an email with reset password link
+router.post('/send-reset-password', async (request, response) => {
+    // accepts an email address
+    // query email in db
+    // if exist create token 
+    // send token in hidden url to email
+    // return 200
+
+    const {email} = request.body
+
+    try {
+        const user = await User.findOne({email})
+        if (!user) return response.status(400).json({message: 'Error, user with email not found.'})
+        
+        const token = user.makeResetToken()
+    
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASS
+            }
+        })
+    
+        const url = `http://${request.hostname}:3000/reset-password?token=${token}`
+        let mailOptions = {
+            from: `Support team <${process.env.GMAIL_USER}>`,
+            to: `${email}`,
+            subject: `Reset password link for ${email}`,
+            html: `
+            <div>
+            <h2>Reset your password</h2>
+            <p>Please ignore this email if it was not meant for you.</p>
+            <p>Click on the link below to begin the password reset process.</p>
+            <a href="${url}">Click here</a>.
+            </div>`
+        }
+        let result = await transporter.sendMail(mailOptions)
+
+        return response.status(200).json({message: 'Successfully sent reset password link, please check your email.'})
+
+    } catch(error) {
+        console.log(error)
+        return response.status(400).json({message: 'Failed to send reset password email.'})
+    }
+})
+
+// Resets the user password given a token, password and confirm password
+router.post('/reset-password', async(request, response) => {
+    const { new_password, token } = request.body
+    if (!new_password || !token) return response.status(400).json({message: 'Error, Missing token or password.'})
+    try {
+        const result = jwt.verify(token, settings.token_secret)
+        const hashedPassword = await bcrypt.hash(new_password, settings.bcrypt_iterations)
+        let user = await User.findById(result._id)
+        user.password = hashedPassword
+        await user.save()
+        return response.status(200).json({message: 'Successfully saved your new password, you can now login.'})
+    } catch (e) {
+        return response.status(400).json({message: 'Invalid token please try to reset your password again.'})
+    }
+})
+
 router.get('/activate', (request, response) => {
     
     const { token } = request.query
