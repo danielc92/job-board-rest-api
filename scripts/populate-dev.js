@@ -35,6 +35,7 @@ const insertEmployer = () => {
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         is_employer: true,
+        activated: true,
     }
     User.create(user)
         .then(result => {
@@ -77,6 +78,7 @@ const insertJobSeekers = () => {
             password: Utils.getPassword(),
             first_name: faker.name.firstName(),
             last_name: faker.name.lastName(),
+            activated: true,
         }
     ))
     
