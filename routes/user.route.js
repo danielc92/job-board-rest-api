@@ -70,7 +70,7 @@ router.post('/register', async (request, response) => {
             message: `Account has been successfully created for ${user.email}. Please check your email inbox and activate your account before logging in.`
         })
     } catch (error) {
-        return response.status(400).json({ message: 'Something went wrong while creating your account'})
+        return response.status(400).json({ error: 'Something went wrong while creating your account'})
     }
     
 })
@@ -118,7 +118,7 @@ router.post('/send-reset-password', async (request, response) => {
 // Resets the user password given a token, password
 router.post('/reset-password', async(request, response) => {
     const { password, token } = request.body
-    if (!password || !token) return response.status(400).json({message: 'Error, Missing token or password.'})
+    if (!password || !token) return response.status(400).json({error: 'Error, Missing token or password.'})
     try {
         const result = jwt.verify(token, settings.token_secret)
         const hashedPassword = await bcrypt.hash(password, settings.bcrypt_iterations)
@@ -127,14 +127,14 @@ router.post('/reset-password', async(request, response) => {
         await user.save()
         return response.status(200).json({message: 'Successfully saved your new password, you can now login.'})
     } catch (e) {
-        return response.status(400).json({message: 'Something went wrong, the password reset link may have expired.'})
+        return response.status(400).json({error: 'Something went wrong, the password reset link may have expired.'})
     }
 })
 
 router.post('/activate', (request, response) => {
     
     const { token } = request.query
-    if (!token) return response.status(400).json({message: 'No token provided, activation has failed.'})
+    if (!token) return response.status(400).json({error: 'No token provided, activation has failed.'})
 
     try {
         const result = jwt.verify(token, settings.token_secret)

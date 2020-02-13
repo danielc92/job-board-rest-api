@@ -14,7 +14,7 @@ router.get('/employer', authMiddleware, (request, response) => {
     CareerStat.findOne({ user_id: _id })
         .select(select.GET_PROFILE)
         .then(result => response.status(200).json({ result }))
-        .catch(error => response.status(400).json({ message: 'An error occured. No profile found.'}))
+        .catch(error => response.status(400).json({ error: 'An error occured. No profile found.'}))
 })
 
 /*
@@ -27,7 +27,7 @@ router.get('/', authMiddleware, (request, response) => {
     CareerStat.findOne({ user_id: _id })
         .select(select.GET_PROFILE)
         .then(result => response.status(200).json({ result }))
-        .catch(error => response.status(400).json({ message: 'An error occured. No profile found.'}))
+        .catch(error => response.status(400).json({ error: 'An error occured. No profile found.'}))
 })
 
 /*
@@ -62,7 +62,7 @@ router.patch('/', authMiddleware, (request, response ) => {
         .then(result => {
             return response.status(200).json({ message: 'Successfully updated career stats.', result})
         })
-        .catch(error => response.status(400).json({ message: 'Failed to update career stats.'}))
+        .catch(error => response.status(400).json({ error: 'Failed to update career stats.'}))
     
 })
 

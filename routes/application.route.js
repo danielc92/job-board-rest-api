@@ -104,13 +104,13 @@ router.get('/list/employer', authMiddleware, async (request, response) => {
     const { _id } = request.user;
     // Check if the job belongs to the employer
     const { job_id, page } = request.query;
-    if (!job_id) return response.status(400).json({ message: "Job_id was not supplied."})
+    if (!job_id) return response.status(400).json({ error: "Job_id was not supplied."})
     try {
         let jobExists = await Job.findOne({ _id: job_id })
-        if (!jobExists) return response.status(400).json({ message: "This job does not exist" })
+        if (!jobExists) return response.status(400).json({ error: "This job does not exist" })
     }
     catch {
-        return response.status(400).json({ message: "Unknown error occured."})
+        return response.status(400).json({ error: "Unknown error occured."})
     }
 
     // Return the results
@@ -131,7 +131,7 @@ router.get('/list/employer', authMiddleware, async (request, response) => {
     .paginate(query, options)
     .then(results => response.status(200).json({ results }))
     .catch(error => {
-        return response.status(400).json({ message: "Failed to fetch the results"})
+        return response.status(400).json({ error: "Failed to fetch the results"})
     })
 })
 
