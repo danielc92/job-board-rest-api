@@ -52,9 +52,9 @@ router.post('/register', async (request, response) => {
             }
         })
     
-        const url = `http://${request.hostname}:3001/api/auth/activate?token=${token}`
+        const url = `http://${request.hostname}:3000/activate-account?token=${token}`
         let mailOptions = {
-            from: `Daniel C <${process.env.GMAIL_USER}>`,
+            from: `${process.env.SENDER_NAME} <${process.env.GMAIL_USER}>`,
             to: `${user.email}`,
             subject: `Welcome to X ${user.first_name} ${user.last_name}`,
             html: `
@@ -77,17 +77,11 @@ router.post('/register', async (request, response) => {
 
 // Sends an email with reset password link
 router.post('/send-reset-password', async (request, response) => {
-    // accepts an email address
-    // query email in db
-    // if exist create token 
-    // send token in hidden url to email
-    // return 200
-
     const {email} = request.body
 
     try {
         const user = await User.findOne({email})
-        if (!user) return response.status(400).json({message: 'Error, user with email not found.'})
+        if (!user) return response.status(400).json({error: 'Something went wrong please check that the email is correct.'})
         
         const token = user.makeResetToken()
     
@@ -101,7 +95,7 @@ router.post('/send-reset-password', async (request, response) => {
     
         const url = `http://${request.hostname}:3000/reset-password?token=${token}`
         let mailOptions = {
-            from: `Support team <${process.env.GMAIL_USER}>`,
+            from: `${process.env.SENDER_NAME} <${process.env.GMAIL_USER}>`,
             to: `${email}`,
             subject: `Reset password link for ${email}`,
             html: `
@@ -117,28 +111,27 @@ router.post('/send-reset-password', async (request, response) => {
         return response.status(200).json({message: 'Successfully sent reset password link, please check your email.'})
 
     } catch(error) {
-        console.log(error)
-        return response.status(400).json({message: 'Failed to send reset password email.'})
+        return response.status(400).json({error: 'Something went wrong please check that the email is correct.'})
     }
 })
 
-// Resets the user password given a token, password and confirm password
+// Resets the user password given a token, password
 router.post('/reset-password', async(request, response) => {
-    const { new_password, token } = request.body
-    if (!new_password || !token) return response.status(400).json({message: 'Error, Missing token or password.'})
+    const { password, token } = request.body
+    if (!password || !token) return response.status(400).json({message: 'Error, Missing token or password.'})
     try {
         const result = jwt.verify(token, settings.token_secret)
-        const hashedPassword = await bcrypt.hash(new_password, settings.bcrypt_iterations)
+        const hashedPassword = await bcrypt.hash(password, settings.bcrypt_iterations)
         let user = await User.findById(result._id)
         user.password = hashedPassword
         await user.save()
         return response.status(200).json({message: 'Successfully saved your new password, you can now login.'})
     } catch (e) {
-        return response.status(400).json({message: 'Invalid token please try to reset your password again.'})
+        return response.status(400).json({message: 'Something went wrong, the password reset link may have expired.'})
     }
 })
 
-router.get('/activate', (request, response) => {
+router.post('/activate', (request, response) => {
     
     const { token } = request.query
     if (!token) return response.status(400).json({message: 'No token provided, activation has failed.'})
@@ -148,9 +141,9 @@ router.get('/activate', (request, response) => {
     
         User.findByIdAndUpdate({ _id: result._id}, {activated: true})
             .then(success => response.status(200).json({ message: 'Your account has been activated.'}))
-            .catch(error => response.status(400).json({ message: 'Activation link has expired.'}))
+            .catch(error => response.status(400).json({ error: 'Sorry this activation link has expired or invalid.'}))
     } catch (error) {
-        return response.status(400).json({message: 'Invalid token, activation failed.'})
+        return response.status(400).json({error: 'Sorry this activation link has expired or invalid.'})
     }
 
 })
