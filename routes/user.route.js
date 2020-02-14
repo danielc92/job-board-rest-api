@@ -52,16 +52,16 @@ router.post('/register', async (request, response) => {
             }
         })
     
-        const url = `http://${request.hostname}:3000/activate-account?token=${token}`
         let mailOptions = {
             from: `${process.env.SENDER_NAME} <${process.env.GMAIL_USER}>`,
             to: `${user.email}`,
-            subject: `Welcome to X ${user.first_name} ${user.last_name}`,
+            subject: `Welcome to ${process.env.APPLICATION_NAME} ${user.first_name} ${user.last_name}`,
             html: `
             <div>
-            <h2>Activation Request</h2>
-            <p>Please ignore this email if it was not meant for you.</p>
-            <a href="${url}">Click here</a> to activate your account.
+                <h2>Your new account on ${process.env.APPLICATION_NAME}</h2>
+                <p>A new account was created with ${user.email}. Please verify your email. This activation link will expire in 1 hour.</p>
+                    <a href="http://${request.hostname}:3000/activate-account?token=${token}" style="padding: 0.4rem 1.5rem; background: #21ba45; color: white; border-radius: .28571429rem; text-decoration: none;">Verify</a>
+                <p>If you didn't register for a ${process.env.APPLICATION_NAME} account you can safely ignore this message.</p>
             </div>`
         }
         let result = await transporter.sendMail(mailOptions)
@@ -93,17 +93,16 @@ router.post('/send-reset-password', async (request, response) => {
             }
         })
     
-        const url = `http://${request.hostname}:3000/reset-password?token=${token}`
         let mailOptions = {
             from: `${process.env.SENDER_NAME} <${process.env.GMAIL_USER}>`,
             to: `${email}`,
             subject: `Reset password link for ${email}`,
             html: `
             <div>
-            <h2>Reset your password</h2>
-            <p>Please ignore this email if it was not meant for you.</p>
-            <p>Click on the link below to begin the password reset process.</p>
-            <a href="${url}">Click here</a>.
+            <h2>Your password reset request</h2>
+            <p>You told us you forgot your password. If you really did, click here to choose a new one.</p>
+            <a href="http://${request.hostname}:3000/reset-password?token=${token}" style="padding: 0.4rem 1.5rem; background: #21ba45; color: white; border-radius: .28571429rem; text-decoration: none;">Choose a new password</a>
+            <p>If you didn't mean to reset your password, then you can just ignore this email. Your password will not change. This link will expire in 1 hour.</p>
             </div>`
         }
         let result = await transporter.sendMail(mailOptions)
