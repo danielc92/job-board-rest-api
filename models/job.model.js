@@ -3,6 +3,17 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 
 const JobSchema = mongoose.Schema(
     {
+        title: {
+            type: String,
+            required: true,
+            lowercase: true,
+            trim: true
+        },
+        slug: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         creator_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
@@ -16,12 +27,6 @@ const JobSchema = mongoose.Schema(
         },
         benefits: [String],
         skills: [String],
-        title: {
-            type: String,
-            required: true,
-            lowercase: true,
-            trim: true
-        },
         company_summary: {
             type: String,
             trim: true,
