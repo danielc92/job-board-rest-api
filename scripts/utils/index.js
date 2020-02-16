@@ -1,4 +1,11 @@
 module.exports = {
+    slugify: (string) => {
+        const s = String(string)
+        const part_1 = s.split(' ').join('-')
+        const timestamp = new Date().getTime()
+        const slug = part_1 + '-' + timestamp
+        return slug
+    },
     returnFullState: (code) => {
         let fullState
         switch (code) {
