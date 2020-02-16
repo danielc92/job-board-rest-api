@@ -6,6 +6,7 @@ Inserts dummy data for dev environment
 4. Jobs
 */
 console.log('[INFO] Populating mongodb for development environment.')
+const Helpers = require('./utils')
 const mongoose = require('mongoose')
 const uri = 'mongodb://localhost:27017/jobboard'
 const Utils = require('./utils')
@@ -42,10 +43,12 @@ const insertEmployer = () => {
             let jobData = new Array(12567).fill(null).map(item => {
         
                 const randomLocation = Utils.randomItemFromArray(locationList)
+                const randomTitle = Utils.randomItemFromArray(titlesList)
                 const jobItem = {
                     creator_id: result._id,
                     category: Utils.randomItemFromArray(categoriesList).trim().toLowerCase(),
-                    title: Utils.randomItemFromArray(titlesList),
+                    title: randomTitle,
+                    slug: Helpers.slugify(randomTitle),
                     skills: Utils.randomItemsFromArray(skillsList),
                     benefits: Utils.randomItemsFromArray(benefitsList),
                     company_summary: faker.lorem.paragraph(),
@@ -95,12 +98,17 @@ const insertJobSeekers = () => {
 }
 
 const insertNews = () => {
-    const newsItems = new Array(200).fill(true).map(item => ({
-        title: faker.lorem.text().substring(0, 20),
-        content: new Array(6).fill(null).map(item => faker.lorem.paragraph()),
-        category: 'update',
-        summary: faker.lorem.paragraph()
-    }))
+    const newsItems = new Array(200).fill(true).map(item => {
+        const title = faker.lorem.text().substring(0, 20)
+        const slug = Helpers.slugify(title)
+        return {
+            title,
+            slug,
+            content: new Array(6).fill(null).map(item => faker.lorem.paragraph()),
+            category: 'update',
+            summary: faker.lorem.paragraph()
+        }
+    })
     
     News.insertMany(newsItems)
         .then(result => console.log('[SUCCESS] Inserted news'))

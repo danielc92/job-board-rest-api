@@ -1,24 +1,27 @@
 const Job = require('../models/job.model')
-const mongoosePaginate = require('mongoose-paginate-v2')
 const express = require('express')
 const router = express.Router()
 const authMiddleware = require('../middleware/auth.middleware')
 const select = require('../constants/select')
 const limit = require('../constants/limit')
-
+const Helpers = require('../scripts/utils')
 /*
 Get job detail (Seeker)
 */
 router.get('/', (request, response) => {
-    const { id } = request.query
+    const { slug } = request.query
 
-    if (!id) return response.status(400).json({error: 'Job id field is required.'})
+    if (!slug) return response.status(400).json({error: 'Slug field is required.'})
 
     // Minus unwanted fields
-    Job.findById(id)
+    Job.findOne({ slug })
         .select(select.GET_JOB) 
-        .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error }))
+        .then(results => {
+            console.log(results, typeof(results))
+            if (!results) return response.status(400).json({ error: 'Sorry we couldn\'t find your job.'})
+            return response.status(200).json({ results })
+        })
+        .catch(error => response.status(400).json({ error: 'Failed to find a job.' }))
 })
 
 /*
@@ -96,9 +99,10 @@ router.get('/list/employer', authMiddleware, (request, response) => {
 // Make a post request to test route
 router.post('/', authMiddleware, (request, response) => {
 
-    const new_item = new Job(request.body)
+    let newJob = new Job(request.body)
+    newJob.slug = Helpers.slugify(newJob.title)
 
-    new_item.save()
+    newJob.save()
         .then(result => response.status(200).json({ result }))
         .catch(error => response.status(400).json({ error }))
 })
