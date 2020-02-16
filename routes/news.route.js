@@ -20,9 +20,12 @@ router.get('/list', (request, response) => {
 
 router.get('/', (request, response) => {
     
-    const { _id } = request.query
-    News.findById({ _id })
-        .then(results => response.status(200).json({ results }))
+    const { slug } = request.query
+    News.findOne({ slug })
+        .then(results => {
+            if (!results) return response.status(400).json({ error: 'Sorry, we could not find this article.'})
+            return response.status(200).json({ results })
+        })
         .catch(error => response.status(400).json({ error: 'An error occured. Could not find news article.'}))
 })
 
