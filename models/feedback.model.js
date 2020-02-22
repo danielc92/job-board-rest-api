@@ -5,6 +5,7 @@ const FeedbackSchema = mongoose.Schema({
         type: String,
         enum: [
             'suggestion',
+            'general',
             'report',
             'other',
         ],
