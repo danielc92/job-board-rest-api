@@ -66,7 +66,30 @@ router.get('/list', (request, response) => {
 
     Job.paginate(query, options)
         .then(results => response.status(200).json({ results }))
-        .catch(error => response.status(400).json({ error }))
+        .catch(error => {
+            console.log(error)
+            response.status(400).json({ error })
+        })
+})
+
+router.get('/list/testing', (request, response ) => {
+    
+    let q = { 
+        location: { 
+            '$nearSphere': { 
+                '$maxDistance': 5,
+                '$geometry': { 
+                    type: 'Point',
+                    coordinates: [ 144.8475565865, -37.6789636846] 
+                } 
+            }       
+        } 
+    }
+    
+    Job.find(q)
+        .limit(10)
+        .then(r => response.status(200).json({ r }))
+        .catch(e => response.status(400).json({ e }))
 })
 
 // Retrieve list of jobs with few fields to reduce network bandwidth

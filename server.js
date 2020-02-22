@@ -41,6 +41,7 @@ const categoryRouter = require('./routes/category.route')
 const locationRouter = require('./routes/location.route')
 const careerStatRouter = require('./routes/career_stat.route')
 const newsRouter = require('./routes/news.route')
+const feedbackRouter = require('./routes/feedback.route')
 
 app.use('/api/location', locationRouter)
 app.use('/api/category', categoryRouter)
@@ -51,6 +52,7 @@ app.use('/api/application', applicationRouter)
 app.use('/api/auth', userRouter)
 app.use('/api/career-profile', careerStatRouter)
 app.use('/api/news', newsRouter)
+app.use('/api/feedback', feedbackRouter)
 
 const port = process.env.PORT || 3001
 
