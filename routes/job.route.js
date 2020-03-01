@@ -5,6 +5,10 @@ const authMiddleware = require('../middleware/auth.middleware')
 const select = require('../constants/select')
 const limit = require('../constants/limit')
 const Helpers = require('../scripts/utils')
+const Filter = require('bad-words')
+const filter = new Filter()
+
+
 /*
 Get job detail (Seeker)
 */
@@ -123,6 +127,13 @@ router.get('/list/employer', authMiddleware, (request, response) => {
 router.post('/', authMiddleware, (request, response) => {
 
     let newJob = new Job(request.body)
+    // Clean
+    newJob.title = filter.clean(newJob.title)
+    newJob.company_summary = filter.clean(newJob.company_summary)
+    newJob.contact_summary = filter.clean(newJob.contact_summary)
+    newJob.job_summary = filter.clean(newJob.job_summary)
+
+    // Create slug
     newJob.slug = Helpers.slugify(newJob.title)
 
     newJob.save()
@@ -140,9 +151,9 @@ router.patch('/', authMiddleware, (request, response) => {
     
     const { _id } = request.user
 
-    query = { _id: job_id, creator_id: _id }
+    const query = { _id: job_id, creator_id: _id }
 
-    update = { open: false }
+    const update = { open: false }
 
     const options = { runValidators: true }
     Job.findOneAndUpdate(query, update, options)
