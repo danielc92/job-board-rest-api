@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Feedback = require('../models/feedback.model')
 const authMiddleware = require('../middleware/auth.middleware')
+const Filter = require('bad-words')
+const filter = new Filter()
 
 router.post('/', authMiddleware, (request, response) => {
     console.log(request, request.body)
@@ -9,7 +11,7 @@ router.post('/', authMiddleware, (request, response) => {
     const { _id } = request.user
 
     const feedback = new Feedback({
-        message, 
+        message: filter.clean(message), 
         category, 
         user_id: _id
     })
