@@ -5,6 +5,8 @@ const router = express.Router();
 const select = require('../constants/select');
 const authMiddleware = require('../middleware/auth.middleware');
 const limit = require('../constants/limit')
+const Filter = require('bad-words')
+const filter = new Filter()
 
 /*
 Update status of job applications (Employers and Seekers)
@@ -62,7 +64,7 @@ router.post('/', authMiddleware, async (request, response) => {
     const application = new JobApplication({
         applicant_id: _id, 
         job_id, 
-        user_message
+        user_message: filter.clean(user_message)
     })
     
     application.save()
