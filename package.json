@@ -16,6 +16,7 @@
   "author": "Daniel Corcoran",
   "license": "ISC",
   "dependencies": {
+    "bad-words": "^3.0.3",
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
