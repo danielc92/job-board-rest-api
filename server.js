@@ -8,11 +8,11 @@ const cors = require('cors')
 app.use(cors())
 
 // Rate limiter
-const limiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: 200
-})
-app.use(limiter)
+// const limiter = rateLimit({
+//     windowMs: 60 * 1000,
+//     max: 200
+// })
+// app.use(limiter)
 
 // Handle debug mode for mongoose
 if (process.env.NODE_ENV !== 'PRODUCTION') {
