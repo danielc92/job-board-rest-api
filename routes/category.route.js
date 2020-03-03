@@ -3,6 +3,7 @@ const router = express.Router()
 const Category = require('../models/category.model')
 const client = require('../redis-client')
 const { ONE_MINUTE } = require('../constants/ttl')
+
 /*
 Get category list
 */
@@ -20,8 +21,6 @@ router.get('/list', (request, response) => {
             })
             .catch(error => response.status(400).json({ error }))
     })
-
-    
     
 })
 
