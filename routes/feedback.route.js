@@ -6,7 +6,6 @@ const Filter = require('bad-words')
 const filter = new Filter()
 
 router.post('/', authMiddleware, (request, response) => {
-    console.log(request, request.body)
     const { message, category } = request.body
     const { _id } = request.user
 
