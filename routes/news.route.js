@@ -33,12 +33,19 @@ router.get('/list', (request, response) => {
 router.get('/', (request, response) => {
     
     const { slug } = request.query
-    News.findOne({ slug })
-        .then(results => {
-            if (!results) return response.status(400).json({ error: 'Sorry, we could not find this article.'})
-            return response.status(200).json({ results })
-        })
-        .catch(error => response.status(400).json({ error: 'An error occured. Could not find news article.'}))
+
+    const key = `news:detail:${slug}`
+
+    client.get(key, function(err, reply) {
+        if (reply) return response.status(200).json({results: JSON.parse(reply)})
+        News.findOne({ slug })
+            .then(results => {
+                if (!results) return response.status(400).json({ error: 'Sorry, we could not find this article.'})
+                client.setex(key, ONE_HOUR, JSON.stringify(results))
+                return response.status(200).json({ results })
+            })
+            .catch(error => response.status(400).json({ error: 'An error occured. Could not find news article.'}))
+    })
 })
 
 module.exports = router
