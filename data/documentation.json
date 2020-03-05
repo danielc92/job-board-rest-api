@@ -1,0 +1,84 @@
+[
+    {
+        "title":"Terms of use",
+        "route":"terms-of-use",
+        "content": [
+            {
+                "node": "heading-3",
+                "value": "Information for personal, non-commercial use only"
+            },
+            {
+                "node": "paragraph",
+                "value": "You may not modify, copy, reproduce, republish, upload, post, transmit or distribute in any way any material from this Site including code and software. You must not use this Site for any purpose that is unlawful or prohibited by these terms of use."
+            },
+            {
+                "node":"paragraph",
+                "value":"You may not use data mining, robots, screen scraping, or similar automated data gathering, extraction or publication tools on this Site (including without limitation for the purposes of establishing, maintaining, advancing or reproducing information contained on our Site on your own website or in any other publication), except with Our prior written consent."
+            }
+        ]
+    },
+    {
+        "title":"Privacy Policy",
+        "route":"privacy-policy",
+        "content": [
+            {
+                "node":"paragraph",
+                "value":"We care strongly about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
+            },
+            {
+                "node": "heading-3",
+                "value": "Information"
+            },
+            {
+                "node": "paragraph",
+                "value": "The information we collect through the use of this site will be used for providing you services, improving services through analytics of data and creating new services. Information is stored in the cloud and security measures are put in place to keep your information safe."
+            },
+            {
+                "node": "heading-3",
+                "value": "Access to your personal information"
+            },
+            {
+                "node": "paragraph",
+                "value": "If at any time you need a copy of your personal information, you may request for access to your personal information, stored on this site and it shall be provided to you."
+            },
+
+            {
+                "node": "heading-3",
+                "value": "Identifying yourself to others"
+            },
+            {
+                "node": "paragraph"
+            },
+            {
+                "node": "heading-3",
+                "value": "Unwanted communications"
+            },
+            {
+                "node":"paragraph",
+                "value":"If you wish to unsubscribe to any email services provided by this site, please contact us, such that we can stop unwanted communications."
+            },
+            {
+                "node": "heading-3",
+                "value": "Incorrect information"
+            },
+            {
+                "node":"paragraph",
+                "value":"If you believe the information stored by our site pertaining to you is incorrect, please contact us and we will correct it."
+            }
+        ]
+    },
+    {
+        "title":"Frequently asked questions (FAQ)",
+        "route":"faq",
+        "content": [
+            {
+                "node": "heading-3",
+                "value": "There is nothing here yet"
+            },
+            {
+                "node": "paragraph",
+                "value": "We are still thinking about this!"
+            }
+        ]
+    }
+]
