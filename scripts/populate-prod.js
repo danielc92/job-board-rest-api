@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const Utils = require('./utils')
 const Skill = require('../models/skill.model')
 const Benefit = require('../models/benefit.model')
+const Documentation = require('../models/documentation.model')
 const Category = require('../models/category.model')
 const Location = require('../models/location.model')
 const uri = 'mongodb://localhost:27017/jobboard'
@@ -23,6 +24,7 @@ const western_australia = require('../locality/WA.json')
 const skillsList = require('../data/skills.json')
 const benefitsList = require('../data/benefits.json')
 const categoriesList = require('../data/categories.json')
+const docsData = require('../data/documentation.json')
 
 mongoose.connect(uri, { useNewUrlParser: true,  useUnifiedTopology: true })
 const db = mongoose.connection
@@ -44,6 +46,10 @@ Skill.insertMany(skillsData)
     .then(result => console.log('[SUCCESS] Inserted skills'))
     .catch(error => console.log('[ERROR] Failed to insert skills', error))
 
+// Documentation 
+Documentation.insertMany(docsData)
+    .then(result => console.log('[SUCCESS] Inserted documentation'))
+    .catch(error => console.log('[ERROR] Failed to insert documentation', error))
 // Categories
 const categoriesData = categoriesList.map(name => ({ name }))
 
