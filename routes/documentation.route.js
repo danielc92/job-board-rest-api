@@ -7,7 +7,7 @@ const client = require('../redis-client')
 const { THREE_HOURS } = require('../constants/ttl')
 const key = 'docs:list'
 
-router.get('/', (request, response) => {
+router.get('/list', (request, response) => {
     client.get(key, function(err, reply) {
         if (reply) return response.status(200).json({results: JSON.parse(reply)})
 
