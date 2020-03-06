@@ -21,49 +21,72 @@
         "title":"Privacy Policy",
         "route":"privacy-policy",
         "content": [
+
             {
                 "node":"paragraph",
                 "value":"We care strongly about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
             },
             {
-                "node": "heading-3",
-                "value": "Information"
-            },
-            {
-                "node": "paragraph",
-                "value": "The information we collect through the use of this site will be used for providing you services, improving services through analytics of data and creating new services. Information is stored in the cloud and security measures are put in place to keep your information safe."
-            },
-            {
-                "node": "heading-3",
-                "value": "Access to your personal information"
-            },
-            {
-                "node": "paragraph",
-                "value": "If at any time you need a copy of your personal information, you may request for access to your personal information, stored on this site and it shall be provided to you."
-            },
-
-            {
-                "node": "heading-3",
-                "value": "Identifying yourself to others"
-            },
-            {
-                "node": "paragraph"
-            },
-            {
-                "node": "heading-3",
-                "value": "Unwanted communications"
+                "node":"heading-3",
+                "value":"What information we collect and why"
             },
             {
                 "node":"paragraph",
-                "value":"If you wish to unsubscribe to any email services provided by this site, please contact us, such that we can stop unwanted communications."
-            },
-            {
-                "node": "heading-3",
-                "value": "Incorrect information"
+                "value":"In order to give you the best possible experience using this site, we may collect information from your interactions with our network, such as Internet Protocol addresses, browser type, referring site, timestamps, job preferences, personal skills/attributes, contact information."
             },
             {
                 "node":"paragraph",
-                "value":"If you believe the information stored by our site pertaining to you is incorrect, please contact us and we will correct it."
+                "value":"We collect personal information for several reasons, which are highlighted below;"
+            },
+            {
+                "node":"unordered-list",
+                "value":["Delivering core services of the website",
+                "Creating new services or improving existing services",
+            "Generating reports, insights or analytics from aggregated de-identified user data."]
+            },
+            {
+                "node":"paragraph",
+                "value":"Your personal information will be stored using third party services and/or cloud solution providers."
+            },
+            {
+                "node":"heading-3",
+                "value":"Information disclosure"
+            },
+            {
+                "node":"paragraph",
+                "value":"We do not share, sell, rent, or trade User Personal Information with third parties for commercial purposes."
+            },
+            {
+                "node":"paragraph",
+                "value":"We may use User Personal Information with your permission, so we can perform services you have authorized. For example, if you indicate you are looking for work, we may contact you with opportunities."
+            },
+            {
+                "node":"paragraph",
+                "value":"We may share User Personal Information with a limited number of third party vendors who process it on our behalf to provide or improve our service, and who have agreed to privacy restrictions similar to our own Privacy Statement."
+            },
+            {
+                "node":"heading-3",
+                "value":"Access to personal information"
+            },
+            {
+                "node":"paragraph",
+                "value":"If you need a copy of your personal information, you can contact us and we can arrange for a transfer of said copy. You will also be provided with an option to not identify yourself to other members of the site."
+            },
+            {
+                "node":"heading-3",
+                "value":"Unsolicited communication"
+            },
+            {
+                "node":"paragraph",
+                "value":"We may send you emails related to your account status, job preference updates, job application process status. You may unsubscribe to these services at any time if you no longer wish to be a part of them."
+            },
+            {
+                "node":"heading-3",
+                "value":"Misinformation"
+            },
+            {
+                "node":"paragraph",
+                "value":"We try our best to ensure information on this site is correct,  however we can not guarantee at all times it will be. If you believe information pertaining to you on this site is incorrect you can contact us and arrange to have it corrected accordingly."
             }
         ]
     },
