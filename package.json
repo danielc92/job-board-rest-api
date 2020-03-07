@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "redis-clear": "docker exec redis-instance redis-cli FLUSHALL",
     "redis-start": "docker run --name redis-instance -d -p 6379:6379 redis",
     "mongo-start": "docker run --name mongo-instance -d -p 27017:27017 mongo",
     "mongo-gen-all": "concurrently --kill-others \"npm run mongo-gen-prod\" \"npm run mongo-gen-dev\"",
     "mongo-gen-prod": "node ./scripts/populate-prod.js",
     "mongo-gen-dev": "node ./scripts/populate-dev.js",
+    
     "server": "nodemon server.js"
   },
   "keywords": [],
