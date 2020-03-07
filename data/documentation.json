@@ -4,6 +4,27 @@
         "route":"terms-of-use",
         "content": [
             {
+                "node":"heading-1",
+                "value":"Terms & Conditions"
+            },
+            {
+                "node":"paragraph",
+                "value": "These terms and conditions (\"Terms\") govern all users (defined as \"users\", \"you\" and \"your\") that access and use the contents and services provided on [This site].com (across desktop, mobile, tablet. Your access to and use of the information, materials and services provided on this Site is conditional upon your acceptance and compliance with the Terms."
+            },
+            {
+                "node":"paragraph",
+                "value":"Your continued use of this Site will be deemed as acceptance of these Terms by you. Access to and use of the contents and services provided on this site shall be subject to the Privacy Policy Statement and these Terms. If you do not accept either or both of the Privacy Statement and/or the Terms, please do not join, access, view, download or otherwise use any services offered by this Site. We reserve the right to modify these Terms outlined below, at any given time without notice."
+            },
+
+            {
+                "node": "heading-3",
+                "value": "Our rights to use information you send us"
+            },
+            {
+                "node": "paragraph",
+                "value": "[This site] welcomes ideas and feedback from you about all aspects of the site. You agree that we may reproduce, transmit, distribute, create derivative works of, and publicly display any mateiral and other information (including ideas for new or improved products and services) that you submit to any public areas of the Site or by email to us. Please read our privacy policy (/privacy-policy) for more information."
+            },
+            {
                 "node": "heading-3",
                 "value": "Information for personal, non-commercial use only"
             },
@@ -15,6 +36,8 @@
                 "node":"paragraph",
                 "value":"You may not use data mining, robots, screen scraping, or similar automated data gathering, extraction or publication tools on this Site (including without limitation for the purposes of establishing, maintaining, advancing or reproducing information contained on our Site on your own website or in any other publication), except with Our prior written consent."
             }
+
+
         ]
     },
     {
@@ -24,7 +47,7 @@
 
             {
                 "node":"paragraph",
-                "value":"We care strongly about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
+                "value":"We strongly care about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
             },
             {
                 "node":"heading-3",
@@ -94,13 +117,10 @@
         "title":"Frequently asked questions (FAQ)",
         "route":"faq",
         "content": [
-            {
-                "node": "heading-3",
-                "value": "There is nothing here yet"
-            },
+
             {
                 "node": "paragraph",
-                "value": "We are still thinking about this!"
+                "value": "There is nothing here yet. We will fill this out shortly."
             }
         ]
     }
