@@ -15,7 +15,7 @@ router.get('/list', (request, response) => {
             .find()
             .lean()
             .then(results => {
-                client.setex(key, THREE_HOURS, JSON.stringify(results))
+                client.setex(key, 5, JSON.stringify(results))
                 response.status(200).json({results})
             })
             .catch(error => response.status(400).json({error: 'Could not find documentation results, please try again.'}))
