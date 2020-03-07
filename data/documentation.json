@@ -1,12 +1,8 @@
 [
     {
-        "title":"Terms of use",
+        "title":"Terms & conditions",
         "route":"terms-of-use",
         "content": [
-            {
-                "node":"heading-1",
-                "value":"Terms & Conditions"
-            },
             {
                 "node":"paragraph",
                 "value": "These terms and conditions (\"Terms\") govern all users (defined as \"users\", \"you\" and \"your\") that access and use the contents and services provided on [This site].com (across desktop, mobile, tablet. Your access to and use of the information, materials and services provided on this Site is conditional upon your acceptance and compliance with the Terms."
