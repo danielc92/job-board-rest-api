@@ -64,7 +64,7 @@ router.post('/', authMiddleware, async (request, response) => {
     const application = new JobApplication({
         applicant_id: _id, 
         job_id, 
-        user_message: filter.clean(user_message)
+        user_message: user_message ? filter.clean(user_message) : ''
     })
     
     application.save()
