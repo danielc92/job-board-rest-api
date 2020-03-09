@@ -1,15 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const BenefitSchema = mongoose.Schema({
+const BenefitSchema = mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true
     }
-},
-{
+  },
+  {
     timestamps: true
-})
+  }
+)
 
-module.exports = mongoose.model('Benefit', BenefitSchema)
+module.exports = mongoose.model("Benefit", BenefitSchema)

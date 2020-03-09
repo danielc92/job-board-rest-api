@@ -1,36 +1,37 @@
-const mongoose = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate-v2')
+const mongoose = require("mongoose")
+const mongoosePaginate = require("mongoose-paginate-v2")
 
-const NewsSchema = mongoose.Schema({
+const NewsSchema = mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     slug: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true
     },
     content: {
-        type: [String],
-        required: true
+      type: [Object],
+      required: true
     },
     summary: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     category: {
-        type: String,
-        enum: ['update', 'news article'],
-        required: true
+      type: String,
+      enum: ["update", "news article"],
+      required: true
     }
-},
-{
+  },
+  {
     timestamps: true
-})
-
+  }
+)
 
 NewsSchema.plugin(mongoosePaginate)
-const News = mongoose.model('News', NewsSchema)
+const News = mongoose.model("News", NewsSchema)
 
 module.exports = News

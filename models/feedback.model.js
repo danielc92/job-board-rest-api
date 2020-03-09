@@ -1,28 +1,28 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const FeedbackSchema = mongoose.Schema({
+const FeedbackSchema = mongoose.Schema(
+  {
     category: {
-        type: String,
-        enum: [
-            'suggestion',
-            'general',
-            'report',
-            'other',
-        ],
-        required:true,
+      type: String,
+      enum: ["suggestion", "general", "report", "other"],
+      required: true
     },
-    message:{
-        type: String,
-        required:true,
-        maxLength: 500
+    message: {
+      type: String,
+      required: true,
+      maxLength: 500
+    },
+    closed: {
+      type: Boolean,
+      default: false
     },
     user_id: {
-        type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId
     }
-   
-},
-{
+  },
+  {
     timestamps: true
-})
+  }
+)
 
-module.exports = mongoose.model('Feedback', FeedbackSchema)
+module.exports = mongoose.model("Feedback", FeedbackSchema)
