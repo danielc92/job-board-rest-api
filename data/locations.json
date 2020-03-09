@@ -1,33 +1,23 @@
 [
-    {
-        "location": {
-            "type" : "Point",
-            "coordinates" : [
-                    144.8196120895,
-                    -37.7806325712
-            ]
-        },
-        "location_string": "ALBION, 3020, Victoria (VIC)"
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [144.8196120895, -37.7806325712]
     },
-    {
-        "location" : {
-            "type" : "Point",
-            "coordinates" : [
-                    144.8087211938,
-                    -37.7949602901
-            ]
-        },
-        "location_string" : "SUNSHINE WEST, 3020, Victoria (VIC)"
+    "location_string": "ALBION, 3020, Victoria (VIC)"
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [144.8087211938, -37.7949602901]
     },
-    {
-        "location" : {
-            "type" : "Point",
-            "coordinates" : [
-                    144.8357001767,
-                    -37.7650471308
-            ]
-        },
-        "location_string" : "SUNSHINE NORTH, 3020, Victoria (VIC)"
-    }
-
+    "location_string": "SUNSHINE WEST, 3020, Victoria (VIC)"
+  },
+  {
+    "location": {
+      "type": "Point",
+      "coordinates": [144.8357001767, -37.7650471308]
+    },
+    "location_string": "SUNSHINE NORTH, 3020, Victoria (VIC)"
+  }
 ]

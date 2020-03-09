@@ -1,123 +1,121 @@
 [
-    {
-        "title":"Terms & conditions",
-        "route":"terms-of-use",
-        "content": [
-            {
-                "node":"paragraph",
-                "value": "These terms and conditions (\"Terms\") govern all users (defined as \"users\", \"you\" and \"your\") that access and use the contents and services provided on [This site].com (across desktop, mobile, tablet. Your access to and use of the information, materials and services provided on this Site is conditional upon your acceptance and compliance with the Terms."
-            },
-            {
-                "node":"paragraph",
-                "value":"Your continued use of this Site will be deemed as acceptance of these Terms by you. Access to and use of the contents and services provided on this site shall be subject to the Privacy Policy Statement and these Terms. If you do not accept either or both of the Privacy Statement and/or the Terms, please do not join, access, view, download or otherwise use any services offered by this Site. We reserve the right to modify these Terms outlined below, at any given time without notice."
-            },
+  {
+    "title": "Terms & conditions",
+    "route": "terms-of-use",
+    "content": [
+      {
+        "node": "paragraph",
+        "value": "These terms and conditions (\"Terms\") govern all users (defined as \"users\", \"you\" and \"your\") that access and use the contents and services provided on [This site].com (across desktop, mobile, tablet. Your access to and use of the information, materials and services provided on this Site is conditional upon your acceptance and compliance with the Terms."
+      },
+      {
+        "node": "paragraph",
+        "value": "Your continued use of this Site will be deemed as acceptance of these Terms by you. Access to and use of the contents and services provided on this site shall be subject to the Privacy Policy Statement and these Terms. If you do not accept either or both of the Privacy Statement and/or the Terms, please do not join, access, view, download or otherwise use any services offered by this Site. We reserve the right to modify these Terms outlined below, at any given time without notice."
+      },
 
-            {
-                "node": "heading-3",
-                "value": "Our rights to use information you send us"
-            },
-            {
-                "node": "paragraph",
-                "value": "[This site] welcomes ideas and feedback from you about all aspects of the site. You agree that we may reproduce, transmit, distribute, create derivative works of, and publicly display any mateiral and other information (including ideas for new or improved products and services) that you submit to any public areas of the Site or by email to us. Please read our privacy policy (/privacy-policy) for more information."
-            },
-            {
-                "node": "heading-3",
-                "value": "Information for personal, non-commercial use only"
-            },
-            {
-                "node": "paragraph",
-                "value": "You may not modify, copy, reproduce, republish, upload, post, transmit or distribute in any way any material from this Site including code and software. You must not use this Site for any purpose that is unlawful or prohibited by these terms of use."
-            },
-            {
-                "node":"paragraph",
-                "value":"You may not use data mining, robots, screen scraping, or similar automated data gathering, extraction or publication tools on this Site (including without limitation for the purposes of establishing, maintaining, advancing or reproducing information contained on our Site on your own website or in any other publication), except with Our prior written consent."
-            }
-
-
+      {
+        "node": "heading-3",
+        "value": "Our rights to use information you send us"
+      },
+      {
+        "node": "paragraph",
+        "value": "[This site] welcomes ideas and feedback from you about all aspects of the site. You agree that we may reproduce, transmit, distribute, create derivative works of, and publicly display any mateiral and other information (including ideas for new or improved products and services) that you submit to any public areas of the Site or by email to us. Please read our privacy policy (/privacy-policy) for more information."
+      },
+      {
+        "node": "heading-3",
+        "value": "Information for personal, non-commercial use only"
+      },
+      {
+        "node": "paragraph",
+        "value": "You may not modify, copy, reproduce, republish, upload, post, transmit or distribute in any way any material from this Site including code and software. You must not use this Site for any purpose that is unlawful or prohibited by these terms of use."
+      },
+      {
+        "node": "paragraph",
+        "value": "You may not use data mining, robots, screen scraping, or similar automated data gathering, extraction or publication tools on this Site (including without limitation for the purposes of establishing, maintaining, advancing or reproducing information contained on our Site on your own website or in any other publication), except with Our prior written consent."
+      }
+    ]
+  },
+  {
+    "title": "Privacy Policy",
+    "route": "privacy-policy",
+    "content": [
+      {
+        "node": "paragraph",
+        "value": "We strongly care about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
+      },
+      {
+        "node": "heading-3",
+        "value": "What information we collect and why"
+      },
+      {
+        "node": "paragraph",
+        "value": "In order to give you the best possible experience using this site, we may collect information from your interactions with our network, such as Internet Protocol addresses, browser type, referring site, timestamps, job preferences, personal skills/attributes, contact information."
+      },
+      {
+        "node": "paragraph",
+        "value": "We collect personal information for several reasons, which are highlighted below;"
+      },
+      {
+        "node": "unordered-list",
+        "value": [
+          "Delivering core services of the website",
+          "Creating new services or improving existing services",
+          "Generating reports, insights or analytics from aggregated de-identified user data."
         ]
-    },
-    {
-        "title":"Privacy Policy",
-        "route":"privacy-policy",
-        "content": [
-
-            {
-                "node":"paragraph",
-                "value":"We strongly care about the privacy and safety of members, below is some important information relating to your privacy while using our website/services. Please read them carefully."
-            },
-            {
-                "node":"heading-3",
-                "value":"What information we collect and why"
-            },
-            {
-                "node":"paragraph",
-                "value":"In order to give you the best possible experience using this site, we may collect information from your interactions with our network, such as Internet Protocol addresses, browser type, referring site, timestamps, job preferences, personal skills/attributes, contact information."
-            },
-            {
-                "node":"paragraph",
-                "value":"We collect personal information for several reasons, which are highlighted below;"
-            },
-            {
-                "node":"unordered-list",
-                "value":["Delivering core services of the website",
-                "Creating new services or improving existing services",
-            "Generating reports, insights or analytics from aggregated de-identified user data."]
-            },
-            {
-                "node":"paragraph",
-                "value":"Your personal information will be stored using third party services and/or cloud solution providers."
-            },
-            {
-                "node":"heading-3",
-                "value":"Information disclosure"
-            },
-            {
-                "node":"paragraph",
-                "value":"We do not share, sell, rent, or trade User Personal Information with third parties for commercial purposes."
-            },
-            {
-                "node":"paragraph",
-                "value":"We may use User Personal Information with your permission, so we can perform services you have authorized. For example, if you indicate you are looking for work, we may contact you with opportunities."
-            },
-            {
-                "node":"paragraph",
-                "value":"We may share User Personal Information with a limited number of third party vendors who process it on our behalf to provide or improve our service, and who have agreed to privacy restrictions similar to our own Privacy Statement."
-            },
-            {
-                "node":"heading-3",
-                "value":"Access to personal information"
-            },
-            {
-                "node":"paragraph",
-                "value":"If you need a copy of your personal information, you can contact us and we can arrange for a transfer of said copy. You will also be provided with an option to not identify yourself to other members of the site."
-            },
-            {
-                "node":"heading-3",
-                "value":"Unsolicited communication"
-            },
-            {
-                "node":"paragraph",
-                "value":"We may send you emails related to your account status, job preference updates, job application process status. You may unsubscribe to these services at any time if you no longer wish to be a part of them."
-            },
-            {
-                "node":"heading-3",
-                "value":"Misinformation"
-            },
-            {
-                "node":"paragraph",
-                "value":"We try our best to ensure information on this site is correct,  however we can not guarantee at all times it will be. If you believe information pertaining to you on this site is incorrect you can contact us and arrange to have it corrected accordingly."
-            }
-        ]
-    },
-    {
-        "title":"Frequently asked questions (FAQ)",
-        "route":"faq",
-        "content": [
-
-            {
-                "node": "paragraph",
-                "value": "There is nothing here yet. We will fill this out shortly."
-            }
-        ]
-    }
+      },
+      {
+        "node": "paragraph",
+        "value": "Your personal information will be stored using third party services and/or cloud solution providers."
+      },
+      {
+        "node": "heading-3",
+        "value": "Information disclosure"
+      },
+      {
+        "node": "paragraph",
+        "value": "We do not share, sell, rent, or trade User Personal Information with third parties for commercial purposes."
+      },
+      {
+        "node": "paragraph",
+        "value": "We may use User Personal Information with your permission, so we can perform services you have authorized. For example, if you indicate you are looking for work, we may contact you with opportunities."
+      },
+      {
+        "node": "paragraph",
+        "value": "We may share User Personal Information with a limited number of third party vendors who process it on our behalf to provide or improve our service, and who have agreed to privacy restrictions similar to our own Privacy Statement."
+      },
+      {
+        "node": "heading-3",
+        "value": "Access to personal information"
+      },
+      {
+        "node": "paragraph",
+        "value": "If you need a copy of your personal information, you can contact us and we can arrange for a transfer of said copy. You will also be provided with an option to not identify yourself to other members of the site."
+      },
+      {
+        "node": "heading-3",
+        "value": "Unsolicited communication"
+      },
+      {
+        "node": "paragraph",
+        "value": "We may send you emails related to your account status, job preference updates, job application process status. You may unsubscribe to these services at any time if you no longer wish to be a part of them."
+      },
+      {
+        "node": "heading-3",
+        "value": "Misinformation"
+      },
+      {
+        "node": "paragraph",
+        "value": "We try our best to ensure information on this site is correct,  however we can not guarantee at all times it will be. If you believe information pertaining to you on this site is incorrect you can contact us and arrange to have it corrected accordingly."
+      }
+    ]
+  },
+  {
+    "title": "Frequently asked questions (FAQ)",
+    "route": "faq",
+    "content": [
+      {
+        "node": "paragraph",
+        "value": "There is nothing here yet. We will fill this out shortly."
+      }
+    ]
+  }
 ]
