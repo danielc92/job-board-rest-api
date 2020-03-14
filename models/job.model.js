@@ -1,6 +1,17 @@
 const mongoose = require("mongoose")
 const mongoosePaginate = require("mongoose-paginate-v2")
 
+const employment_types = [
+  "full-time",
+  "part-time",
+  "casual",
+  "fixed-term",
+  "shift worker",
+  "daily/weekly hire",
+  "probatiton",
+  "outworkers",
+  "other"
+]
 const JobSchema = mongoose.Schema(
   {
     title: {
@@ -79,6 +90,10 @@ const JobSchema = mongoose.Schema(
     },
     location_string: {
       type: String
+    },
+    employment_type: {
+      type: String,
+      enum: employment_types
     }
   },
   {

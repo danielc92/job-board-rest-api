@@ -20,6 +20,17 @@ const categoriesList = require("../data/categories.json")
 const benefitsList = require("../data/benefits.json")
 const titlesList = require("../data/titles.json")
 const locationList = require("../data/locations.json")
+const employment_types = [
+  "full-time",
+  "part-time",
+  "casual",
+  "fixed-term",
+  "shift worker",
+  "daily/weekly hire",
+  "probatiton",
+  "outworkers",
+  "other"
+]
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -56,6 +67,7 @@ const insertEmployer = () => {
           job_summary: faker.lorem.paragraph(),
           contact_summary: faker.lorem.paragraph(),
           requirements: [],
+          employment_type: Utils.randomItemFromArray(employment_types),
           salary_range_low: Utils.randomLowSalary(),
           salary_range_high: Utils.randomHighSalary(),
           location_string: randomLocation.location_string,
