@@ -11,8 +11,7 @@
     "mongo-gen-all": "concurrently --kill-others \"npm run mongo-gen-prod\" \"npm run mongo-gen-dev\"",
     "mongo-gen-prod": "node ./scripts/populate-prod.js",
     "mongo-gen-dev": "node ./scripts/populate-dev.js",
-    
-    "server": "nodemon server.js"
+    "server": "docker restart mongo-instance & docker restart redis-instance & nodemon server.js"
   },
   "keywords": [],
   "author": "Daniel Corcoran",

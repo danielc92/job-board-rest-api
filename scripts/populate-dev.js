@@ -27,7 +27,7 @@ const employment_types = [
   "fixed-term",
   "shift worker",
   "daily/weekly hire",
-  "probatiton",
+  "probation",
   "outworkers",
   "other"
 ]
