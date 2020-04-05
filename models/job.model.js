@@ -10,7 +10,7 @@ const employment_types = [
   "daily/weekly hire",
   "probation",
   "outworkers",
-  "other"
+  "other",
 ]
 const JobSchema = mongoose.Schema(
   {
@@ -18,86 +18,91 @@ const JobSchema = mongoose.Schema(
       type: String,
       required: true,
       lowercase: true,
-      trim: true
+      trim: true,
     },
     slug: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     creator_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      trim: true
+      trim: true,
     },
     category: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+    },
+    company_name: {
+      type: String,
+      required: false,
+      trim: true,
     },
     benefits: [String],
     skills: [String],
     company_summary: {
       type: String,
       trim: true,
-      maxlength: 500
+      maxlength: 500,
     },
     job_summary: {
       type: String,
       trim: true,
-      maxlength: 500
+      maxlength: 500,
     },
     contact_summary: {
       type: String,
       trim: true,
-      maxlength: 500
+      maxlength: 500,
     },
     requirements: [
       {
         type: String,
         required: true,
         lowercase: true,
-        trim: true
-      }
+        trim: true,
+      },
     ],
     salary_range_low: {
       type: Number,
       min: 0,
-      max: 1000000000
+      max: 1000000000,
     },
     salary_range_high: {
       type: Number,
       min: 0,
-      max: 1000000000
+      max: 1000000000,
     },
     closes: {
-      type: Date
+      type: Date,
     },
     open: {
       type: Boolean,
-      default: true
+      default: true,
     },
     location: {
       type: {
         type: String,
-        default: "Point"
+        default: "Point",
       },
       coordinates: {
         type: [Number],
-        default: [0, 0]
-      }
+        default: [0, 0],
+      },
     },
     location_string: {
-      type: String
+      type: String,
     },
     employment_type: {
       type: String,
-      enum: employment_types
-    }
+      enum: employment_types,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 

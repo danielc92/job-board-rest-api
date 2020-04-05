@@ -20,7 +20,7 @@ router.get("/", (request, response) => {
   // Minus unwanted fields
   Job.findOne({ slug })
     .select(select.GET_JOB)
-    .then(results => {
+    .then((results) => {
       console.log(results, typeof results)
       if (!results)
         return response
@@ -28,7 +28,7 @@ router.get("/", (request, response) => {
           .json({ error: "Sorry we couldn't find your job." })
       return response.status(200).json({ results })
     })
-    .catch(error =>
+    .catch((error) =>
       response.status(400).json({ error: "Failed to find a job." })
     )
 })
@@ -50,15 +50,15 @@ router.get("/list", (request, response) => {
     query = {
       ...query,
       $text: {
-        $search: title
-      }
+        $search: title,
+      },
     }
   }
 
   if (location_string) {
     query = {
       ...query,
-      location_string
+      location_string,
     }
   }
 
@@ -66,7 +66,7 @@ router.get("/list", (request, response) => {
   let options = {
     select: select.GET_JOB_LIST_SEEKER,
     sort: { createdAt: "desc" },
-    limit: limit.JOB_LIST_MAIN
+    limit: limit.JOB_LIST_MAIN,
   }
 
   // Append page number
@@ -75,8 +75,8 @@ router.get("/list", (request, response) => {
   }
 
   Job.paginate(query, options)
-    .then(results => response.status(200).json({ results }))
-    .catch(error => {
+    .then((results) => response.status(200).json({ results }))
+    .catch((error) => {
       console.log(error)
       response.status(400).json({ error })
     })
@@ -89,16 +89,16 @@ router.get("/list/testing", (request, response) => {
         $maxDistance: 5,
         $geometry: {
           type: "Point",
-          coordinates: [144.8475565865, -37.6789636846]
-        }
-      }
-    }
+          coordinates: [144.8475565865, -37.6789636846],
+        },
+      },
+    },
   }
 
   Job.find(q)
     .limit(10)
-    .then(r => response.status(200).json({ r }))
-    .catch(e => response.status(400).json({ e }))
+    .then((r) => response.status(200).json({ r }))
+    .catch((e) => response.status(400).json({ e }))
 })
 
 // Retrieve list of jobs with few fields to reduce network bandwidth
@@ -108,14 +108,14 @@ router.get("/list/employer", authMiddleware, (request, response) => {
   // const { _id } = request.user;
 
   let query = {
-    creator_id: _id
+    creator_id: _id,
   }
 
   // Build options
   let options = {
     select: select.GET_JOB_LIST_EMPLOYER,
     sort: { createdAt: "desc" },
-    limit: limit.JOB_LIST_DASHBOARD
+    limit: limit.JOB_LIST_DASHBOARD,
   }
 
   // Append page number
@@ -124,11 +124,10 @@ router.get("/list/employer", authMiddleware, (request, response) => {
   }
 
   Job.paginate(query, options)
-    .then(results => response.status(200).json({ results }))
-    .catch(error => response.status(400).json({ error }))
+    .then((results) => response.status(200).json({ results }))
+    .catch((error) => response.status(400).json({ error }))
 })
 
-// Make a post request to test route
 router.post("/", authMiddleware, (request, response) => {
   let newJob = new Job(request.body)
   // Clean
@@ -142,8 +141,8 @@ router.post("/", authMiddleware, (request, response) => {
 
   newJob
     .save()
-    .then(result => response.status(200).json({ result }))
-    .catch(error => response.status(400).json({ error }))
+    .then((result) => response.status(200).json({ result }))
+    .catch((error) => response.status(400).json({ error }))
 })
 
 // Update job status
@@ -163,12 +162,12 @@ router.patch("/", authMiddleware, (request, response) => {
 
   const options = { runValidators: true }
   Job.findOneAndUpdate(query, update, options)
-    .then(result =>
+    .then((result) =>
       response
         .status(200)
         .json({ message: "Successfully updated job status to closed." })
     )
-    .catch(error => response.status(400).json({ error }))
+    .catch((error) => response.status(400).json({ error }))
 })
 
 module.exports = router
