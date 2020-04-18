@@ -29,14 +29,14 @@ const employment_types = [
   "daily/weekly hire",
   "probation",
   "outworkers",
-  "other"
+  "other",
 ]
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
 db.on("error", console.error.bind(console, "Connection error:"))
-db.once("open", function() {
+db.once("open", function () {
   console.log(`Successfully connected to MongoDB on ${uri}.`)
 })
 
@@ -47,11 +47,11 @@ const insertEmployer = () => {
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
     is_employer: true,
-    activated: true
+    activated: true,
   }
   User.create(user)
-    .then(result => {
-      let jobData = new Array(12567).fill(null).map(item => {
+    .then((result) => {
+      let jobData = new Array(12567).fill(null).map((item) => {
         const randomLocation = Utils.randomItemFromArray(locationList)
         const randomTitle = Utils.randomItemFromArray(titlesList)
         const jobItem = {
@@ -59,28 +59,29 @@ const insertEmployer = () => {
           category: Utils.randomItemFromArray(categoriesList)
             .trim()
             .toLowerCase(),
-          title: randomTitle,
-          slug: Helpers.slugify(randomTitle),
-          skills: Utils.randomItemsFromArray(skillsList),
           benefits: Utils.randomItemsFromArray(benefitsList),
+          company_name: faker.name.firstName() + " ltd corp",
           company_summary: faker.lorem.paragraph(),
-          job_summary: faker.lorem.paragraph(),
           contact_summary: faker.lorem.paragraph(),
-          requirements: [],
           employment_type: Utils.randomItemFromArray(employment_types),
-          salary_range_low: Utils.randomLowSalary(),
-          salary_range_high: Utils.randomHighSalary(),
+          job_summary: faker.lorem.paragraph(),
           location_string: randomLocation.location_string,
-          location: randomLocation.location
+          location: randomLocation.location,
+          requirements: [],
+          salary_range_high: Utils.randomHighSalary(),
+          salary_range_low: Utils.randomLowSalary(),
+          skills: Utils.randomItemsFromArray(skillsList),
+          slug: Helpers.slugify(randomTitle),
+          title: randomTitle,
         }
         return jobItem
       })
 
       Job.insertMany(jobData)
-        .then(result => console.log("[SUCCESS] Inserted jobs"))
-        .catch(error => console.log("[ERROR] Failed to insert jobs", error))
+        .then((result) => console.log("[SUCCESS] Inserted jobs"))
+        .catch((error) => console.log("[ERROR] Failed to insert jobs", error))
     })
-    .catch(error => console.log(error))
+    .catch((error) => console.log(error))
   return
 }
 
@@ -90,40 +91,42 @@ const insertJobSeekers = () => {
     password: Utils.getPassword(),
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    activated: true
+    activated: true,
   }))
 
   User.insertMany(jobSeekers)
-    .then(results => {
+    .then((results) => {
       console.log("[SUCCESS] Inserted job seekers")
-      const careerStats = results.map(r => ({ user_id: r._id }))
+      const careerStats = results.map((r) => ({ user_id: r._id }))
       CareerStats.insertMany(careerStats)
-        .then(results => console.log("[SUCCESS] Inserted profiles"))
-        .catch(error => console.log("[ERROR] Failed to insert profiles"))
+        .then((results) => console.log("[SUCCESS] Inserted profiles"))
+        .catch((error) => console.log("[ERROR] Failed to insert profiles"))
     })
-    .catch(error => console.log("[ERROR] Failed to insert job seekers", error))
+    .catch((error) =>
+      console.log("[ERROR] Failed to insert job seekers", error)
+    )
   return
 }
 
 const insertNews = () => {
-  const newsItems = new Array(200).fill(true).map(item => {
+  const newsItems = new Array(200).fill(true).map((item) => {
     const title = faker.lorem.text().substring(0, 20)
     const slug = Helpers.slugify(title)
     return {
       title,
       slug,
-      content: new Array(6).fill(null).map(item => ({
+      content: new Array(6).fill(null).map((item) => ({
         node: "paragraph",
-        value: faker.lorem.paragraph()
+        value: faker.lorem.paragraph(),
       })),
       category: "update",
-      summary: faker.lorem.paragraph()
+      summary: faker.lorem.paragraph(),
     }
   })
 
   News.insertMany(newsItems)
-    .then(result => console.log("[SUCCESS] Inserted news"))
-    .catch(error => console.log("[ERROR] Failed to insert news", error))
+    .then((result) => console.log("[SUCCESS] Inserted news"))
+    .catch((error) => console.log("[ERROR] Failed to insert news", error))
 
   return
 }
