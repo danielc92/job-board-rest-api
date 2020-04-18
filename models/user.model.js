@@ -8,72 +8,72 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      lowercase: true
+      lowercase: true,
     },
     password: {
       type: String,
       required: true,
       trim: true,
-      minlength: 8
+      minlength: 8,
     },
     first_name: {
       type: String,
       required: true,
       trim: true,
-      lowercase: true
+      lowercase: true,
     },
     last_name: {
       type: String,
       required: true,
       trim: true,
-      lowercase: true
+      lowercase: true,
     },
     admin: {
       type: Boolean,
-      default: false
+      default: false,
     },
     is_employer: {
       type: Boolean,
-      default: false
+      default: false,
     },
     activated: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 
-UserSchema.methods.makeToken = function() {
+UserSchema.methods.makeToken = function () {
   const tokenHash = jwt.sign(
     {
       _id: this._id,
       email: this.email,
-      is_employer: this.is_employer
+      is_employer: this.is_employer,
     },
-    settings.token_secret,
+    process.env.BCRYPT_SECRET,
     {
-      expiresIn: settings.token_expiry_seconds
+      expiresIn: settings.token_expiry_seconds,
     }
   )
 
   const token = {
-    "x-auth-token": tokenHash
+    "x-auth-token": tokenHash,
   }
 
   return token
 }
 
-UserSchema.methods.makeResetToken = function() {
+UserSchema.methods.makeResetToken = function () {
   const token = jwt.sign(
     {
-      _id: this._id
+      _id: this._id,
     },
-    settings.token_secret,
+    process.env.BCRYPT_SECRET,
     {
-      expiresIn: settings.reset_token_expiry_seconds
+      expiresIn: settings.reset_token_expiry_seconds,
     }
   )
   return token
