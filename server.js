@@ -40,6 +40,7 @@ const careerStatRouter = require("./routes/career_stat.route")
 const newsRouter = require("./routes/news.route")
 const feedbackRouter = require("./routes/feedback.route")
 const documentationRouter = require("./routes/documentation.route")
+const statusRouter = require("./routes/status.route")
 
 app.use("/api/location", locationRouter)
 app.use("/api/category", categoryRouter)
@@ -52,9 +53,13 @@ app.use("/api/career-profile", careerStatRouter)
 app.use("/api/news", newsRouter)
 app.use("/api/feedback", feedbackRouter)
 app.use("/api/documentation", documentationRouter)
+app.use("/api/status", statusRouter)
 
 const port = process.env.PORT || 3001
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
+
+
+Sint anim id do commodo nisi nulla eu sit deserunt ut amet dolore laborum quis. Fugiat aute esse ipsum nostrud culpa minim laboris magna non sit. Consectetur sit dolore sit elit excepteur. Cupidatat sit quis nulla ipsum sint do eiusmod dolore. Voluptate ullamco veniam magna irure ad occaecat excepteur ullamco.
