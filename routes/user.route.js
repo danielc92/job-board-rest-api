@@ -61,7 +61,7 @@ router.post("/register", async (request, response) => {
             <div>
                 <h2>Your new account on ${process.env.APPLICATION_NAME}</h2>
                 <p>A new account was created with ${user.email}. Please verify your email. This activation link will expire in 1 hour.</p>
-                    <a href="http://${request.hostname}:3000/activate-account?token=${token}" style="padding: 0.4rem 1.5rem; background: #21ba45; color: white; border-radius: .28571429rem; text-decoration: none;">Verify</a>
+                    <a href="http://${request.hostname}:3000/activate-account?token=${token}" style="margin: 16px 0px;padding: 0.4rem 1.5rem; background: #21ba45; color: white; border-radius: .28571429rem; text-decoration: none;">Verify</a>
                 <p>If you didn't register for a ${process.env.APPLICATION_NAME} account you can safely ignore this message.</p>
             </div>`,
     }
