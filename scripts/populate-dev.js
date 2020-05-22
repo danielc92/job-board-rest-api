@@ -109,16 +109,44 @@ const insertJobSeekers = () => {
 }
 
 const insertNews = () => {
-  const newsItems = new Array(200).fill(true).map((item) => {
+  const newsItems = new Array(30).fill(true).map((item) => {
     const title = faker.lorem.text().substring(0, 20)
     const slug = Helpers.slugify(title)
+    const content = [
+      {
+        node: "heading-3",
+        value: faker.lorem.words(4),
+      },
+      {
+        node: "image",
+        value: "https://i.picsum.photos/id/1060/900/600.jpg",
+      },
+      {
+        node: "paragraph",
+        value: faker.lorem.words(50),
+      },
+      {
+        node: "unordered-list",
+        value: [
+          faker.lorem.words(4),
+          faker.lorem.words(4),
+          faker.lorem.words(4),
+          faker.lorem.words(4),
+        ],
+      },
+      {
+        node: "paragraph",
+        value: faker.lorem.words(28),
+      },
+      {
+        node: "heading-3",
+        value: faker.lorem.words(4),
+      },
+    ]
     return {
       title,
       slug,
-      content: new Array(6).fill(null).map((item) => ({
-        node: "paragraph",
-        value: faker.lorem.paragraph(),
-      })),
+      content,
       category: "update",
       summary: faker.lorem.paragraph(),
     }
