@@ -7,7 +7,9 @@ module.exports = {
   GET_LOCATION: "location location_string state postcode locality",
   GET_NEWS_LIST: "title summary category createdAt slug",
   GET_PROFILE:
-    "summary skills experience education achievements available phone -_id",
+    "summary skills experience education achievements available phone createdAt updatedAt -_id",
+  GET_PROFILE_USER_POPULATE:
+    "is_employer email first_name last_name createdAt updatedAt",
   GET_SKILL: "name",
   GET_USER: "-password -admin",
   GET_APPLICATION_LIST_EMPLOYER: "first_name last_name email",
