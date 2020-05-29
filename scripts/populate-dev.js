@@ -51,7 +51,15 @@ const insertEmployer = () => {
   }
   User.create(user)
     .then((result) => {
-      let jobData = new Array(12567).fill(null).map((item) => {
+      CareerStats.create({ user_id: result._id })
+        .then((results) =>
+          console.log("[SUCCESS] Created profile for employer")
+        )
+        .catch((error) =>
+          console.log("[ERROR] Failed to create employer profile")
+        )
+
+      let jobData = new Array(1000).fill(null).map((item) => {
         const randomLocation = Utils.randomItemFromArray(locationList)
         const randomTitle = Utils.randomItemFromArray(titlesList)
         const jobItem = {
