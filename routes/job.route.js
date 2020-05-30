@@ -148,7 +148,7 @@ router.post("/", authMiddleware, (request, response) => {
 // Update job status
 router.patch("/", authMiddleware, (request, response) => {
   // Store query
-  const { job_id } = request.query
+  const { job_id } = request.body
 
   // Check if params exist
   if (!job_id)
