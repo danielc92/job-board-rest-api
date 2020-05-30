@@ -10,8 +10,9 @@ Get profile detail
 
 router.get("/", authMiddleware, (request, response) => {
   const { _id } = request.user
+  const { user_id } = request.query
 
-  CareerStat.findOne({ user_id: _id })
+  CareerStat.findOne({ user_id: user_id ? user_id : _id })
     .select(select.GET_PROFILE)
     .populate("user_id", select.GET_PROFILE_USER_POPULATE)
     .then((results) => response.status(200).json({ results }))
