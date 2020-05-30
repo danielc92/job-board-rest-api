@@ -158,10 +158,16 @@ router.get("/list/employer", authMiddleware, async (request, response) => {
     sort: { createdAt: "desc" },
     select: select.GET_APPLICATION_LIST,
     limit: limit.APPLICATION_LIST_DASHBOARD,
-    populate: {
-      path: "applicant_id",
-      select: select.GET_APPLICATION_LIST_EMPLOYER,
-    },
+    populate: [
+      {
+        path: "applicant_id",
+        select: select.GET_APPLICATION_LIST_EMPLOYER,
+      },
+      {
+        path: "job_id",
+        select: "title",
+      },
+    ],
   }
 
   if (page) options.page = page
