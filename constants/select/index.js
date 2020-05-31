@@ -9,8 +9,9 @@ module.exports = {
   GET_PROFILE:
     "summary skills experience education achievements available phone createdAt updatedAt -_id",
   GET_PROFILE_USER_POPULATE:
-    "is_employer email first_name last_name createdAt updatedAt",
+    "is_employer email first_name last_name createdAt updatedAt saved_searches saved_jobs",
   GET_SKILL: "name",
-  GET_USER: "-password -admin",
+  GET_USER: "-password -admin -is_employer -activated",
+
   GET_APPLICATION_LIST_EMPLOYER: "first_name last_name email",
 }
