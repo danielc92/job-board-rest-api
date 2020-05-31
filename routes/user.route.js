@@ -217,7 +217,48 @@ router.post("/login", async (request, response) => {
 })
 
 /*
-Get user detail (Employer)
+Get user profile only (Seekers)
+*/
+
+router.get("/my-details", authMiddleware, (request, response) => {
+  const { _id } = request.user
+
+  User.findOne({ _id })
+    .select(select.GET_USER)
+    .then((results) => response.status(200).json({ results }))
+    .catch((error) => response.status(400).json({ error }))
+})
+
+router.patch("/my-details", authMiddleware, (request, response) => {
+  const { saved_searches, saved_jobs } = request.body
+  const query = { _id: request.user._id }
+
+  let patch = {}
+  if (saved_jobs) {
+    patch = { ...patch, saved_jobs }
+  }
+  if (saved_searches) {
+    patch = { ...patch, saved_searches }
+  }
+
+  const message = saved_searches
+    ? "You have successfully updated your saved searches."
+    : saved_jobs
+    ? "You have successfully added a new job to your saved jobs."
+    : "You have successfully updated your personal details."
+
+  User.findOneAndUpdate(query, patch, { runValidators: true, upsert: true })
+    .then((results) => {
+      return response.status(200).json({ message })
+    })
+    .catch((error) => {
+      console.log(error)
+      response.status(400).json({ error: "Failed to update user details." })
+    })
+})
+
+/*
+Get user profile (Employer)
 */
 router.get("/", authMiddleware, async (request, response) => {
   const { id } = request.query
