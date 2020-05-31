@@ -40,6 +40,14 @@ const UserSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    saved_searches: {
+      type: [String],
+      default: [],
+    },
+    saved_jobs: {
+      type: [mongoose.Schema.Types.ObjectId],
+      default: [],
+    },
   },
   {
     timestamps: true,
