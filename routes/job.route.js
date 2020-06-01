@@ -1,4 +1,5 @@
 const Job = require("../models/job.model")
+const User = require("../models/user.model")
 const express = require("express")
 const router = express.Router()
 const authMiddleware = require("../middleware/auth.middleware")
@@ -30,6 +31,30 @@ router.get("/", (request, response) => {
     })
     .catch((error) =>
       response.status(400).json({ error: "Failed to find a job." })
+    )
+})
+
+/*
+Get saved job list
+*/
+
+router.get("/list/saved", authMiddleware, (request, response) => {
+  const { _id } = request.user
+
+  User.findById(_id)
+    .then((results) => {
+      Job.find({ _id: { $in: results.saved_jobs } })
+        .select(select.GET_JOB_LIST_SEEKER)
+        .lean()
+        .then((results) => response.status(200).json({ results }))
+        .catch((error) =>
+          response
+            .status(400)
+            .json({ error: "Failed to fetch your saved jobs." })
+        )
+    })
+    .catch((error) =>
+      response.status(400).json({ error: "Failed to fetch your saved jobs." })
     )
 })
 
