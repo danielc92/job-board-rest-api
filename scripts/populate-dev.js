@@ -72,6 +72,7 @@ const insertEmployers = async () => {
         employment_type: Utils.randomItemFromArray(employment_types),
         job_summary: faker.lorem.paragraph(),
         location_string: randomLocation.location_string,
+        state: randomLocation.state,
         location: randomLocation.location,
         requirements: [],
         salary_range_high: Utils.randomHighSalary(),
