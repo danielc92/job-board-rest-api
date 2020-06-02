@@ -96,6 +96,9 @@ const JobSchema = mongoose.Schema(
     location_string: {
       type: String,
     },
+    state: {
+      type: String,
+    },
     employment_type: {
       type: String,
       enum: employment_types,
