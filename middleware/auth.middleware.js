@@ -19,6 +19,11 @@ module.exports = function (request, response, next) {
     request.user = decoded
     next()
   } catch (ex) {
-    response.status(400).json({ error: "Invalid Token, try again." })
+    response
+      .status(400)
+      .json({
+        error:
+          "Your session has expired or is invalid, please try logging in again.",
+      })
   }
 }
