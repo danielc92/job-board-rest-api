@@ -41,6 +41,9 @@ const newsRouter = require("./routes/news.route")
 const feedbackRouter = require("./routes/feedback.route")
 const documentationRouter = require("./routes/documentation.route")
 const statusRouter = require("./routes/status.route")
+const helmet = require("helmet")
+
+app.use(helmet())
 
 app.use("/api/location", locationRouter)
 app.use("/api/category", categoryRouter)
