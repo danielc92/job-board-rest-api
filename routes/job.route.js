@@ -159,6 +159,7 @@ router.post("/", authMiddleware, (request, response) => {
   newJob.title = filter.clean(newJob.title)
   newJob.company_summary = filter.clean(newJob.company_summary)
   newJob.contact_summary = filter.clean(newJob.contact_summary)
+  newJob.job_preview = filter.clean(newJob.job_preview)
   newJob.job_summary = filter.clean(newJob.job_summary)
 
   // Create slug

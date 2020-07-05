@@ -48,6 +48,11 @@ const JobSchema = mongoose.Schema(
       trim: true,
       maxlength: 3000,
     },
+    job_preview: {
+      type: String,
+      trim: true,
+      maxlength: 1000,
+    },
     job_summary: {
       type: String,
       trim: true,
