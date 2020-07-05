@@ -1,8 +1,8 @@
 module.exports = {
   GET_APPLCATION_LIST: "title",
-  GET_JOB_LIST_EMPLOYER: "title job_summary createdAt open",
+  GET_JOB_LIST_EMPLOYER: "title job_preview createdAt open",
   GET_JOB_LIST_SEEKER:
-    "title job_summary salary_range_low salary_range_high slug createdAt category",
+    "title job_preview salary_range_low salary_range_high slug createdAt category",
   GET_JOB: "-__v -location -creator_id -updatedAt",
   GET_LOCATION: "location location_string state postcode locality",
   GET_NEWS_LIST: "title summary category createdAt slug",

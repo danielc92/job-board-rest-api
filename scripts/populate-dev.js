@@ -67,10 +67,15 @@ const insertEmployers = async () => {
           .toLowerCase(),
         benefits: Utils.randomItemsFromArray(benefitsList),
         company_name: faker.name.firstName() + " ltd corp",
-        company_summary: faker.lorem.paragraph(),
-        contact_summary: faker.lorem.paragraph(),
         employment_type: Utils.randomItemFromArray(employment_types),
-        job_summary: faker.lorem.paragraph(),
+        job_preview:
+          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor idunt ut labo.</p><ul><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>eation ullamco labx ea commodo consequat. Lorem ipsum.</li><li>ex ea commodo consex ea um dolor sit amet.</li></ul>",
+        job_summary:
+          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor idunt ut labo.</p><ul><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>ex ea commodo consequat.Lorem ipsum dolor sat.Lorem ipsum dolor sit amet.</li><li>eation ullamco labx ea commodo consequat. Lorem ipsum.</li><li>ex ea commodo consex ea um dolor sit amet.</li></ul>",
+        company_summary:
+          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor idunt ut labo.</p><ul><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>eation ullamco labx ea commodo consequat. Lorem ipsum.</li><li>ex ea commodo consex ea um dolor sit amet.</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor idunt ut labo.</p><ul><li>ex ea commodo consequat.Lorem ipsum dolor sit amet.</li><li>eation ullamco labx ea commodo consequat. Lorem ipsum.</li><li>ex ea commodo consex ea um dolor sit amet.</li></ul>",
+        contact_summary:
+          "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor idunt ut labo.</p>",
         location_string: randomLocation.location_string,
         state: randomLocation.state,
         location: randomLocation.location,
